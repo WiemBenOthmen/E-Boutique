@@ -504,6 +504,7 @@
     <Compile Include="Models\Article.cs">
       <DependentUpon>EBoutiqueModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ArticleViewModel.cs" />
     <Compile Include="Models\Categorie.cs">
       <DependentUpon>EBoutiqueModel.tt</DependentUpon>
     </Compile>
