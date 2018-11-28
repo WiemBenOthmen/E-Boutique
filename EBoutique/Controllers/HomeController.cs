@@ -23,7 +23,7 @@ namespace EBoutique.Controllers
         {
             return View();
         }
-        public ActionResult Tables()
+        public ActionResult ListeArticles()
         {
             // IEnumerable<Marque> marque = dc.Marques.ToList();
             var getmarqueslist = dc.Marques.ToList();
