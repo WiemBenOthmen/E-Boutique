@@ -80,5 +80,14 @@ namespace EBoutique.Controllers
             }
             return ls;
         }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+        public ActionResult Register()
+        {
+            return View();
+        }
     }
 }
