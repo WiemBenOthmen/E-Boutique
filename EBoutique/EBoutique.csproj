@@ -512,6 +512,7 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\Home\Admin.cshtml" />
     <None Include="Views\Home\Home.cshtml" />
     <None Include="Views\Home\Contact.cshtml" />
     <None Include="Views\Home\Categories.cshtml" />

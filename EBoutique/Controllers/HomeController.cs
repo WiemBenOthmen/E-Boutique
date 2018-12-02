@@ -19,6 +19,10 @@ namespace EBoutique.Controllers
             return View();
 
         }
+        public ActionResult Admin()
+        {
+            return View();
+        }
         public ActionResult ListeUsers()
         {
             return View();
@@ -132,6 +136,8 @@ namespace EBoutique.Controllers
                     art.idCategorie = model.idCategorie;
                     art.idType = model.idType;
                     art.idMarque = model.idMarque;
+                    art.disponibilite = false;
+                    dc.Articles.Add(art);
                     dc.SaveChanges();
                     result = true;
                 }
@@ -143,6 +149,19 @@ namespace EBoutique.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+
+        /*public JsonResult GetArticleById(int AticleId)
+        {
+            Article model = dc.Articles.Where(x => x.AticleId == StudentId).SingleOrDefault();
+            string value = string.Empty;
+            value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            return Json(value, JsonRequestBehavior.AllowGet);
+        }*/
+
 
 
 

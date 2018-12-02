@@ -415,7 +415,7 @@
 
                 </div>
                 <div class="modal-body">
-                    <form id="form">
+                    <form id="form" method="post">
                         <fieldset id="SubmitForm">
                             @Html.HiddenFor(m => m.idArticle, new { @id = "ArticleId" })
                             <div class="form-group">
@@ -528,6 +528,7 @@
             // document.getElementsByClassName("dataTables_filter").children().eq(1).css("color:blue");
             //$("#table_filter").css("margin_bottom:50px;")
             $(".dataTables_filter input").addClass('custom');
+            $(".dataTables_filter input").css('margin_bottom:20px;');
             //   $(".dataTables_filter label").addStyle(" background-color: red;");
 
             /* $('#add_data').click(function () {
