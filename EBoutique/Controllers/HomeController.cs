@@ -19,7 +19,7 @@ namespace EBoutique.Controllers
             return View();
 
         }
-        public ActionResult User()
+        public ActionResult ListeUsers()
         {
             return View();
         }
@@ -80,5 +80,17 @@ namespace EBoutique.Controllers
             }
             return ls;
         }
+
+        public JsonResult GetUsers()
+        {
+            using (iBoutiqureDBEntities dc = new iBoutiqureDBEntities())
+            {
+                var users = dc.Users.OrderBy(a => a.nom).ToList();
+                return Json(new { data = users }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+
     }
 }
