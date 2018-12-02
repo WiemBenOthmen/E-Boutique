@@ -29,6 +29,13 @@ namespace EBoutique.Controllers
             var getmarqueslist = dc.Marques.ToList();
             SelectList l = new SelectList(getmarqueslist, "idMarque", "libelleMarque");
             ViewBag.liste = l;
+            var getcategorielist = dc.Categories.ToList();
+            SelectList l1 = new SelectList(getcategorielist, "idCategorie", "libelleCatgorie");
+            ViewBag.liste1 = l1;
+
+            var gettypelist = dc.Types.ToList();
+            SelectList l2 = new SelectList(gettypelist, "idType", "libelleType");
+            ViewBag.liste2 = l2;
             return View();
         }
         public ActionResult Home()
