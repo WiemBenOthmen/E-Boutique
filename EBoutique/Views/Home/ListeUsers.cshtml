@@ -1,12 +1,6 @@
-﻿@model EBoutique.Models.ArticleViewModel
-
-@{
-    ViewBag.Title = "ListeArticles";
-    Layout = null;
+﻿@{
+    Layout= null;
 }
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +13,9 @@
     <meta name="keywords" content="au theme template">
     <!-- Title Page-->
     <title>Tables</title>
+    <!--link base-->
+    
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
     <!-- Fontfaces CSS-->
     <link href="~/Content/asset/css/font-face.css" rel="stylesheet" media="all">
     <link href="~/Content/asset/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
@@ -34,15 +31,18 @@
     <link href="~/Content/asset/vendor/slick/slick.css" rel="stylesheet" media="all">
     <link href="~/Content/asset/vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="~/Content/asset/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- Main CSS-->
     <link href="~/Content/asset/css/theme.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!--script-->
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
-
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+
+
+
 
 </head>
 <body class="animsition">
@@ -64,6 +64,7 @@
                 </div>
             </div>
             <nav class="navbar-mobile">
+
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li>
@@ -72,7 +73,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="chart.html">
+                            <a href="ListeUsers">
                                 <i class="fas fa-chart-bar"></i>Liste des utilisateurs
                             </a>
                         </li>
@@ -120,7 +121,7 @@
 
                         </li>
                         <li>
-                            <a href="chart.html">
+                            <a href="ListeUsers">
                                 <i class="fas fa-chart-bar"></i>Liste des utilisateurs
                             </a>
                         </li>
@@ -333,245 +334,169 @@
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="section__content section__content--p30">
-                    <div class="box" style="position: relative;border-radius: 3px;
-    background: #ffffff;
-    border-top: 3px solid #d2d6de;
-    margin-bottom: 20px;
-    width: 100%;overflow: auto;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.1)">
-                        <div class="box-header" style="color: #444;
-    display: block;
-    padding: 10px;
-    position: relative;">
-                            <h3 class="box-title">Liste des Articles</h3>
-                            <button class="btn btn-success" onclick="AddNewArticle(0)" style="margin-top:10px; border-radius:20px; width:120px;"><i class="fa fa-plus-circle"></i>      Ajouter</button>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body text-nowrap" style="    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
-    padding: 10px;">
-                            <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap" style=" border-top-left-radius:3em;">
-                                <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
-                                    <div class="col-sm-12">
-                                        <table id="table" class="table  table-hover dataTable" role="grid" aria-describedby="example2_info">
-                                            <thead style="color: white;background-color: #0080ff;">
-                                                <tr role="row">
-                                                    <th>Reference Article</th>
-                                                    <th>Libelle</th>
-                                                    <th>Prix</th>
-                                                    <th>Description</th>
-                                                    <th>Disponibilite</th>
-                                                    <th>Nombre pièces</th>
-                                                    <th>Type</th>
-                                                    <th>Marque</th>
-                                                    <th>Couleur</th>
-                                                    <th>Taille</th>
-                                                    <th>Catégorie</th>
-                                                    <th>Image(s)</th>
-                                                    <th></th>
-                                                    <th></th>
+                    <div class="container-fluid">
 
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr role="row" class="odd">
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
 
-                                            </tbody>
+                        <div class="row m-t-30">
+                            <div class="col-md-12">
+                                <!-- DATA TABLE-->
 
-                                        </table>
+                                <h3 class="title-5 m-b-35"> Les utilisateurs</h3>
+                                <div class="table-data__tool">
+                                    <div class="table-data__tool-left">
+                                        <div class="rs-select2--light rs-select2--md">
+                                            <select class="js-select2" name="property">
+                                                <option selected="selected">All Properties</option>
+                                                <option value="">Nom</option>>
+                                                <option value="">Prenom</option>
+                                            </select>
+                                            <div class="dropDownSelect2"></div>
+                                        </div>
+                                        <div class="rs-select2--light rs-select2--sm">
+                                            <select class="js-select2" name="time">
+                                                <option selected="selected">Today</option>
+                                                <option value="">3 Days</option>
+                                                <option value="">1 Week</option>
+                                            </select>
+                                            <div class="dropDownSelect2"></div>
+                                        </div>
+                                        <button class="au-btn-filter">
+                                            <i class="zmdi zmdi-filter-list"></i>filters
+                                        </button>
                                     </div>
+                                    <div class="table-data__tool-right">
+                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                            <i class="zmdi zmdi-plus"></i>Ajouter utilisateur
+                                        </button>
+                                        <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                                            <select class="js-select2" name="type">
+                                                <option selected="selected">Export</option>
+                                                <option value="">Excel</option>
+                                                <option value="">Word</option>
+                                            </select>
+                                            <div class="dropDownSelect2"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive m-b-40">
+                                    <table id="table" class="table table-borderless table-data3" >
+                                        <thead>
+                                            <tr>
+                                                <th>Nom</th>
+                                                <th>Prenom</th>
+                                                <th>E-mail</th>
+                                                <th>Téléphone</th>
+                                                <th>Ville</th>
+                                                <th>Adresse</th>
+                                                <th>Code Postal</th>
+                                                <th>Date de naissance</th>
+                                                <!--<th></th>-->
+                                            </tr>
+                                        </thead>
+                                        <tbody id="setUsersList">
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <!--
+                                                <td>
+                                                    <div class="table-data-feature">
+                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
+                                                            <i class="zmdi zmdi-mail-send"></i>
+                                                        </button>
+                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                            <i class="zmdi zmdi-edit"></i>
+                                                        </button>
+                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                            <i class="zmdi zmdi-delete"></i>
+                                                        </button>
+                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="More">
+                                                            <i class="zmdi zmdi-more"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>-->
+                                            </tr>
+
+
+
+
+
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- END DATA TABLE-->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
                                 </div>
                             </div>
                         </div>
-                        <!-- /.box-body -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="MyModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 id="ModalTitle" style="font-weight:bold;"></h4>
-                    <a href="#" class="close" data-dismiss="modal">&times;</a>
-
-                </div>
-                <div class="modal-body">
-                    <form id="form">
-                        <fieldset id="SubmitForm">
-                            @Html.HiddenFor(m => m.idArticle, new { @id = "ArticleId" })
-                            <div class="form-group">
-                                @Html.TextBoxFor(m => m.refArticle, new { @id = "ref", @class = "form-control", @placeholder = "Réference Article" })
-                            </div>
-                            <div class="form-group">
-                                @Html.TextBoxFor(m => m.libelleArticle, new { @id = "libelle", @class = "form-control", @placeholder = "Libelle" })
-                            </div>
-                            <div class="form-group">
-                                @Html.TextBoxFor(m => m.description, new { @id = "descri", @class = "form-control", @placeholder = "Description" })
-                            </div>
-                            <div class="form-group">
-                                @Html.TextBoxFor(m => m.prix, new { @id = "prix", @class = "form-control", @placeholder = "Prix" })
-                            </div>
-                            <div class="form-group">
-                                @Html.TextBoxFor(m => m.nbpieces, new { @id = "nbpieces", @class = "form-control", @placeholder = "Nombre de pièces" })
-                            </div>
-                            <div class="form-group">
-                                @Html.TextBoxFor(m=>m.couleur,new { @id = "couleur", @class = "form-control", @placeholder = "Couleur" })
-                            </div>
-                            <div class="form-group">
-
-                                @*    <select name="taille">
-            <option>36</option>
-            <option>38</option>
-            <option>40</option>
-            <option>42</option>
-            <option>44</option>
-            <option>46</option>
-
-        </select>
-                                *@
-                                @Html.TextBoxFor(m => m.taille, new { @id = "taille", @class = "form-control", @placeholder = "Taille" })
-
-                            </div>
-                            <div class="form-group">
-                                @if (ViewBag.liste != null)
-                                {@Html.DropDownListFor(m=>m.idMarque, ViewBag.liste as SelectList, "--Selectionner une Marque--", new { @id = "DropDwn", @class = "form-control" })
-                            }
-                            </div>
-                            <div class="form-group">
-                               
-                                @Html.DropDownListFor(m => m.idCategorie, ViewBag.liste1 as SelectList, "--Selectionner une Catégorie", new { @id = "DropDwn", @class = "form-control" })
-                            </div>
-                            <div class="form-group">
-                              
-                                @Html.DropDownListFor(m => m.idType, ViewBag.liste2 as SelectList, "--Selectionner un Type", new { @id = "DropDwn", @class = "form-control" })
-                            </div>
-                            <div class="form-group">
-                                <a href="#" class="btn btn-primary pull-right" id="SaveStudentRecord">Enregistrer</a>
-                            </div>
-
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        /*var myObj = { "name": "John", "age": 31, "address": "123 Street", "city": "New York" };
-        var data = [myObj];//JSON.stringify(myObj);*/
-        $(document).ready(function () {
-            //alert('heloo');
-            var oTable = $('#table').DataTable({
-                "ajax": {
-                    "url": '/home/GetArticles',
-                    "type": "get",
-                    "datatype": "json"
-                },
-                /*"ordering": true,
-                "data": data,*/
-                "columns": [
-                    { "data": "refArticle", "autoWidth": true },
-                    { "data": "libelleArticle", "autoWidth": true },
-                    { "data": "prix", "autoWidth": true },
-                    { "data": "description", "autoWidth": true },
-                    { "data": "disponibilite", "autoWidth": true },
-                    { "data": "nbpieces", "autoWidth": true },
-                    { "data": "libelleType", "autoWidth": true },
-                    { "data": "libelleMarque", "autoWidth": true },
-                    { "data": "couleur", "autoWidth": true },
-                    { "data": "taille", "autoWidth": true },
-                    { "data": "libelleCatgorie", "autoWidth": true },
-                    {
-                        "data": "Idarticle", "render": function (data) {
-                            return '<a class="popup"  href="#" onclick = "EditArticletRecord(' + data + ')"  >Afficher</a>';
-                        }},
-                    {
-                        "data": "Idarticle", "width": "50px", "render": function (data) {
-                            return '<a class="popup"  href="#" onclick = "EditArticletRecord(' + data + ')"  >Edit</a>';
-                        }
-                    },
-                    {
-                        "data": "Idarticle", "width": "50px", "render": function (data) {
-                            return '<a class="popup"  href="#" onclick = "DeleteArticleRecord(' + data + ')" >Delete</a>';
-                        }
-                    }
-                    /* { "data": "Idcouleur", "autoWidth": true },
-                     { "data": "libelle_couleur", "autoWidth": true },*/
-
-                ]
-                /*  "columns": [
-                      { 'data': 'name' },
-                      { 'data': 'age' },
-                      { 'data': 'address' },
-                      { 'data': 'city' }
-                  ]*/
-            });
-            //  document.getElementsByClassName("dataTables_filter").style.background-color="blue";
-            // document.getElementsByClassName("dataTables_filter").children().eq(1).css("color:blue");
-            //$("#table_filter").css("margin_bottom:50px;")
-            $(".dataTables_filter input").addClass('custom');
-            //   $(".dataTables_filter label").addStyle(" background-color: red;");
-
-            /* $('#add_data').click(function () {
-                 // alert('aaaa');
-                 $('#MyModal').modal('show');
-                 $('#form')[0].reset();
-
-
-                 $("#ModalTitle").html("Ajouter un article");
-             });*/
-
-        });
-        function AddNewArticle(StudentId) {
-            /* $("#form")[0].reset();
-
-             $("#DropDwn option:selected").text("--Select Dept--");
-             $("#ModalTitle").html("Add New Student");
-             $("#MyModal").modal();*/
-
-            $('#form')[0].reset();
-            $("#ArticleId").val(0);
-            $("#ModalTitle").html("Ajouter un nouveau Article");
-            $('#MyModal').modal('show');
-
-        }
-    </script>
+    <!--code affichage-->
+    <!--script base-->
     <!-- Jquery JS-->
+    <script src="~/Content/asset/vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
     <script src="~/Content/asset/vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="~/Content/asset/vendor/bootstrap-4.1/bootstrap.min.js"></script>
-
     <!-- Vendor JS       -->
-    <script src="~/Content/asset/vendor/slick/slick.min.js"></script>
+    <script src="~/Content/asset/vendor/slick/slick.min.js">
+    </script>
     <script src="~/Content/asset/vendor/wow/wow.min.js"></script>
     <script src="~/Content/asset/vendor/animsition/animsition.min.js"></script>
-    <script src="~/Content/asset/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <script src="~/Content/asset/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
     <script src="~/Content/asset/vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="~/Content/asset/vendor/counter-up/jquery.counterup.min.js"></script>
+    <script src="~/Content/asset/vendor/counter-up/jquery.counterup.min.js">
+    </script>
     <script src="~/Content/asset/vendor/circle-progress/circle-progress.min.js"></script>
     <script src="~/Content/asset/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="~/Content/asset/vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="~/Content/asset/vendor/select2/select2.min.js"></script>
+    <script src="~/Content/asset/vendor/select2/select2.min.js">
+    </script>
     <!-- Main JS-->
     <script src="~/Content/asset/js/main.js"></script>
+
+    <script>
+        
+        $(document).ready(function () {
+
+            var oTable = $('#table').DataTable({
+                "ajax": {
+                    "url": '/home/GetUsers',
+                    "type": "get",
+                    "datatype": "json"
+                },
+               
+                "columns": [
+                    { "data": "nom", "autoWidth": true },
+                    { "data": "prenom", "autoWidth": true },
+                    { "data": "email", "autoWidth": true },
+                    { "data": "tel", "autoWidth": true },
+                    { "data": "ville", "autoWidth": true },
+                    { "data": "adresse", "autoWidth": true },
+                    { "data": "codePostal", "autoWidth": true },
+                    { "data": "datenaissance", "autoWidth": true }
+                ]
+
+            });
+        });
+
+    </script>
 </body>
 </html>
 <!-- end document-->
