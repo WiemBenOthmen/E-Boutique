@@ -18,7 +18,7 @@
     <meta name="author" content="Hau Nguyen">
     <meta name="keywords" content="au theme template">
     <!-- Title Page-->
-    <title>Tables</title>
+    <title>Liste des Articles</title>
     <!-- Fontfaces CSS-->
     <link href="~/Content/asset/css/font-face.css" rel="stylesheet" media="all">
     <link href="~/Content/asset/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
@@ -465,7 +465,7 @@
                                 @Html.DropDownListFor(m => m.idType, ViewBag.liste2 as SelectList, "--Selectionner un Type", new { @id = "DropDwn", @class = "form-control" })
                             </div>
                             <div class="form-group">
-                                <a href="#" class="btn btn-primary pull-right" id="SaveStudentRecord">Enregistrer</a>
+                                <a href="#" class="btn btn-primary pull-right" id="SaveArticleRecord">Enregistrer</a>
                             </div>
 
                         </fieldset>
@@ -553,6 +553,20 @@
             $('#MyModal').modal('show');
 
         }
+        $("#SaveArticleRecord").click(function () {
+            var data = $("#SubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/Home/SaveDataInDatabase",
+                data: data,
+                success: function (result) {
+                    alert("Success!..");
+                    window.location.href = "/Home/ListeArticles";
+                    $("#MyModal").modal("hide");
+
+                }
+            })
+        })
     </script>
     <!-- Jquery JS-->
     <!-- Bootstrap JS-->

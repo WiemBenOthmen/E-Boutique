@@ -97,6 +97,53 @@ namespace EBoutique.Controllers
             }
 
         }
+        [HttpPost]
+        public JsonResult SaveDataInDatabase(ArticleViewModel model)
+        {
+            var result = false;
+            try
+            {
+                if (model.idArticle > 0)
+                {
+                    Article art = dc.Articles.SingleOrDefault(x => x.disponibilite == true && x.idArticle == model.idArticle);
+                    art.description = model.description;
+                    art.refArticle = model.refArticle;
+                    art.libelleArticle = model.libelleArticle;
+                    art.prix = model.prix;
+                    art.nbpieces = model.nbpieces;
+                    art.couleur = model.couleur;
+                    art.taille = model.taille;
+                    art.idCategorie = model.idCategorie;
+                    art.idType = model.idType;
+                    art.idMarque = model.idMarque;
+                    dc.SaveChanges();
+                    result = true;
+                }
+                else
+                {
+                    Article art = new Article();
+                    art.description = model.description;
+                    art.refArticle = model.refArticle;
+                    art.libelleArticle = model.libelleArticle;
+                    art.prix = model.prix;
+                    art.nbpieces = model.nbpieces;
+                    art.couleur = model.couleur;
+                    art.taille = model.taille;
+                    art.idCategorie = model.idCategorie;
+                    art.idType = model.idType;
+                    art.idMarque = model.idMarque;
+                    dc.SaveChanges();
+                    result = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
 
 
     }

@@ -50,7 +50,8 @@ Notes:	decreasing heading by 0.4em with every subsequent heading level
 
 .custom {
     border-color: red;
-    margin:100px;
+    margin-bottom:20px;
+    border-style:double;
 }
 
 
