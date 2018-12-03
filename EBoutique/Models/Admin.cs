@@ -11,15 +11,18 @@ namespace EBoutique.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+   
     public partial class Admin
     {
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Admin()
         {
             this.Articles = new HashSet<Article>();
         }
-    
+
         public int idAdmin { get; set; }
         public string login { get; set; }
         public string nom { get; set; }
@@ -27,8 +30,10 @@ namespace EBoutique.Models
         public string email { get; set; }
         public string mdp { get; set; }
         public string tel { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Article> Articles { get; set; }
+
+
     }
 }

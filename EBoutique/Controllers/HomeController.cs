@@ -35,6 +35,47 @@ namespace EBoutique.Controllers
         {
             return View();
         }
+        public ActionResult chatbot()
+        {
+            return View();
+        }
+        public ActionResult RegisterAdmin()
+        {
+            return View();
+        }
+        [HttpPost]
+
+            public ActionResult RegisterAdmin(Admin admin)
+            {
+            iBoutiqureDBEntities db = new iBoutiqureDBEntities();
+            //var userloggedIn = db.Users.SingleOrDefault(x => x.login == admin.login && x.mdp == admin.mdp);
+            //if(userloggedIn !=null)
+            //{
+            //    ViewBag.massage = "Vous etes connecté";
+            //    ViewBag.triedOnce = "yes";
+                return RedirectToAction("index", "home/index");
+            
+            //else
+            //{
+            //    ViewBag.triedOnce = "yes";
+            //    return View();
+            //}
+            
+            }
+            public ActionResult LoginAdmin()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult LoginAdmin(Admin admin)
+        {
+            iBoutiqureDBEntities db = new iBoutiqureDBEntities();
+            db.Admins.Add(admin);
+            db.SaveChanges();
+            ViewBag.message = "connexion avec succes";
+            return View();
+        }
+
         public ActionResult Contact()
         {
             return View();
