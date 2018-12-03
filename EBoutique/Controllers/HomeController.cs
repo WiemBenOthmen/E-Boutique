@@ -2,14 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using EBoutique.Models;
+using System.Data.Entity.Core.Objects;
+
 namespace EBoutique.Controllers
 {
     public class HomeController : Controller
     {
-        iBoutiqureDBEntities dc = new iBoutiqureDBEntities();
+        iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2();
         private static DbSet<Marque> lm;
 
         // GET: Home
@@ -35,6 +39,10 @@ namespace EBoutique.Controllers
         {
             return View();
         }
+        public ActionResult Panier()
+        {
+            return View();
+        }
         public ActionResult Contact()
         {
             return View();
@@ -49,7 +57,7 @@ namespace EBoutique.Controllers
         }
         public JsonResult GetArticles()
         {
-            iBoutiqureDBEntities dc = new iBoutiqureDBEntities();
+            iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2();
             List<ArticleViewModel> articles = dc.Articles.Select(x => new ArticleViewModel
             {
                 idArticle = x.idArticle,
@@ -71,7 +79,7 @@ namespace EBoutique.Controllers
         }
         public static List<SelectListItem> GetDropDown()
         {
-            iBoutiqureDBEntities dc = new iBoutiqureDBEntities();
+            iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2();
             List<SelectListItem> ls = new List<SelectListItem>();
             lm =dc.Marques;
             foreach (var temp in lm)
@@ -89,5 +97,51 @@ namespace EBoutique.Controllers
         {
             return View();
         }
+
+        public ActionResult Commande()
+        {
+            iBoutiqureDBEntities2 db = new iBoutiqureDBEntities2();
+            return View(db.fundisplay());
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            using (iBoutiqureDBEntities2 db = new iBoutiqureDBEntities2())
+            {
+
+
+            {
+                Commande cmd = db.Commandes.Where(x => x.idCommande == id).FirstOrDefault<Commande>();
+                db.Commandes.Remove(cmd);
+                db.SaveChanges();
+                return Json(new { success = true, message = "Deleted Successfully" }, JsonRequestBehavior.AllowGet);
+            }
+        
+
+
+
+
+
+
+        //Commande cmd = db.Commandes.Where(x => x.idCommande == id).FirstOrDefault<Commande>();
+
+        //iBoutiqureDBEntities2 db = new iBoutiqureDBEntities2();
+        // var cmd=db.supprimer(id);
+
+        //return Ok(cmd);
+    }
+        }
+
+        //private ActionResult Ok(ObjectResult<Commande> cmd)
+        //{
+        //    throw new NotImplementedException();
+        //    ;
+        //}
+        
+
+        
+
+
     }
 }
