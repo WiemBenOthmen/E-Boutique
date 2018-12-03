@@ -14,7 +14,7 @@
     <!-- Title Page-->
     <title>Tables</title>
     <!--link base-->
-    
+
     <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
     <!-- Fontfaces CSS-->
     <link href="~/Content/asset/css/font-face.css" rel="stylesheet" media="all">
@@ -38,6 +38,7 @@
     <!--script-->
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 
@@ -365,9 +366,10 @@
                                         </button>
                                     </div>
                                     <div class="table-data__tool-right">
-                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                            <i class="zmdi zmdi-plus"></i>Ajouter utilisateur
-                                        </button>
+                                        <!--<button class="au-btn au-btn-icon au-btn--green au-btn--small popup" onclick="/home/save/0">
+        <i class="zmdi zmdi-plus"></i>Ajouter utilisateur
+    </button>                           
+        -->                             
                                         <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                                             <select class="js-select2" name="type">
                                                 <option selected="selected">Export</option>
@@ -378,8 +380,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="table-responsive m-b-40">
-                                    <table id="table" class="table table-borderless table-data3" >
+                                <div class="tablecontainer table-responsive m-b-40">
+                                    <a class="popup btn btn-primary" href="/home/save/0" style="margin-bottom:20px;margin-top:20px">Ajouter un utilisateur</a>
+                                    <table id="table" class="table table-borderless table-data3">
                                         <thead>
                                             <tr>
                                                 <th>Nom</th>
@@ -390,10 +393,12 @@
                                                 <th>Adresse</th>
                                                 <th>Code Postal</th>
                                                 <th>Date de naissance</th>
-                                                <!--<th></th>-->
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+
                                             </tr>
                                         </thead>
-                                        <tbody id="setUsersList">
+                                        <tbody>
                                             <tr>
                                                 <td></td>
                                                 <td></td>
@@ -403,31 +408,9 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
-                                                <!--
-                                                <td>
-                                                    <div class="table-data-feature">
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
-                                                            <i class="zmdi zmdi-mail-send"></i>
-                                                        </button>
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                            <i class="zmdi zmdi-edit"></i>
-                                                        </button>
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                            <i class="zmdi zmdi-delete"></i>
-                                                        </button>
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                                            <i class="zmdi zmdi-more"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>-->
+                                                <td></td>
+                                                <td></td>
                                             </tr>
-
-
-
-
-
-
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -449,7 +432,7 @@
     <!--code affichage-->
     <!--script base-->
     <!-- Jquery JS-->
-    <script src="~/Content/asset/vendor/jquery-3.2.1.min.js"></script>
+    
     <!-- Bootstrap JS-->
     <script src="~/Content/asset/vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="~/Content/asset/vendor/bootstrap-4.1/bootstrap.min.js"></script>
@@ -471,17 +454,20 @@
     <!-- Main JS-->
     <script src="~/Content/asset/js/main.js"></script>
 
-    <script>
-        
-        $(document).ready(function () {
+    <!--code -->
 
+    <script>
+       
+        $(document).ready(function () {
+            
             var oTable = $('#table').DataTable({
                 "ajax": {
                     "url": '/home/GetUsers',
                     "type": "get",
                     "datatype": "json"
                 },
-               
+                /*"ordering": true,
+                "data": data,*/
                 "columns": [
                     { "data": "nom", "autoWidth": true },
                     { "data": "prenom", "autoWidth": true },
@@ -490,10 +476,76 @@
                     { "data": "ville", "autoWidth": true },
                     { "data": "adresse", "autoWidth": true },
                     { "data": "codePostal", "autoWidth": true },
-                    { "data": "datenaissance", "autoWidth": true }
+                    { "data": "datenaissance", "autoWidth": true },
+                    {
+                        "data": "idUser", "width": "50px", "render": function (data) {
+                            return '<a class="popup" href="/home/save/' + data + '">Edit</a>';
+                        }
+
+
+                    },
+                    {
+                        "data": "idUser", "width": "50px", "render": function (data) {
+                            return '<a class="popup" href="/home/delete/' + data + '">Delete</a>';
+                        }
+
+
+                    }
+
+
+
                 ]
 
             });
+
+            $('.tablecontainer').on('click', 'a.popup', function (e) {
+                e.preventDefault();
+                OpenPopup($(this).attr('href'));
+            })
+                
+
+            function OpenPopup(pageUrl) {
+                var $pageContent = $('<div/>');
+                $pageContent.load(pageUrl, function () {
+                    $('#popupForm', $pageContent).removeData('validator')
+                    $('#popupForm', $pageContent).removeData('unobtrusiveValidation');
+                    $.validator.unobtrusive.parse('form');
+                });
+
+                //create popup dialog
+                $dialog = $('<div class="popupWindow" style="overflow:auto"> <div/>')
+                    .html($pageContent)
+                    .dialog({
+                        draggable: false,
+                        autoOpen: false,
+                        resizable: false,
+                        model: true,
+                        title: 'Popup Dialog',
+                        height: 550,
+                        width: 600,
+                        close: function () {
+                            $dialog.dialog('destroy').remove();
+                        }
+                    })
+                $('.popupWindow').on('submit', '#popupForm', function (e) {
+                    var url = $('#popupForm')[0].action;
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: $('#popupForm').serialize(),
+                        success: function (data) {
+                            if (data.status) {
+                                $dialog.dialog('close');
+                                oTable.ajax.reload();
+                            }
+                        }
+                    })
+
+                    e.preventDefault();
+                })
+
+                $dialog.dialog('open');
+            }
         });
 
     </script>

@@ -501,6 +501,8 @@
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
@@ -512,11 +514,13 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\Home\Delete.cshtml" />
     <None Include="Views\Home\Home.cshtml" />
     <None Include="Views\Home\Contact.cshtml" />
     <None Include="Views\Home\Categories.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\ListeArticles.cshtml" />
+    <Content Include="Views\Home\Save.cshtml" />
     <None Include="Views\Home\Single.cshtml" />
     <None Include="Views\Home\ListeUsers.cshtml" />
     <Content Include="Web.config" />
@@ -552,6 +556,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EBoutiqueModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\extended\User.cs" />
     <Compile Include="Models\Marque.cs">
       <DependentUpon>EBoutiqueModel.tt</DependentUpon>
     </Compile>

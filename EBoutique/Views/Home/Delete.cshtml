@@ -1,0 +1,52 @@
+﻿@model EBoutique.Models.User
+
+<h2>Delete utilisateur</h2>
+@using (Html.BeginForm("delete", "home", FormMethod.Post, new { id = "#popupForm" }))
+{
+    @Html.HiddenFor(a => a.idUser)
+
+    <div class="form-group">
+        <label>Nom</label>
+        <p>@Model.nom</p>
+    </div>
+
+    <div class="form-group">
+        <label>Prenom</label>
+        <p>@Model.prenom</p>
+    </div>
+
+    <div class="form-group">
+        <label>E-mail</label>
+        <p>@Model.email</p>
+    </div>
+
+    <div class="form-group">
+        <label>Téléphone</label>
+        <p>@Model.tel</p>
+    </div>
+
+    <div class="form-group">
+        <label>Ville</label>
+        <p>@Model.ville</p>
+    </div>
+
+    <div class="form-group">
+        <label>Adresse</label>
+        <p>@Model.adresse</p>
+    </div>
+
+    <div class="form-group">
+        <label>Code Postal</label>
+        <p>@Model.codePostal</p>
+    </div>
+
+    <div class="form-group">
+        <label>Date de naissance</label>
+        <p>@Model.datenaissance</p>
+    </div>
+
+    <div>
+        <input type="submit" value="Delete" />
+    </div>
+
+}
