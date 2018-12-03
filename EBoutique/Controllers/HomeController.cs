@@ -23,7 +23,7 @@ namespace EBoutique.Controllers
             return View();
 
         }
-        public ActionResult User()
+        public ActionResult ListeUsers()
         {
             return View();
         }
@@ -116,7 +116,7 @@ namespace EBoutique.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(int id)
+        public ActionResult Deletem(int id)
         {
             using (iBoutiqureDBEntities2 db = new iBoutiqureDBEntities2())
             {
@@ -154,15 +154,7 @@ namespace EBoutique.Controllers
 
 
 
-        public JsonResult GetUsers()
-        {
-            using (iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2())
-            {
-                var users = dc.Users.OrderBy(a => a.nom).ToList();
-                return Json(new { data = users }, JsonRequestBehavior.AllowGet);
-            }
-
-        }
+       
         [HttpPost]
         public JsonResult SaveDataInDatabase(ArticleViewModel model)
         {
@@ -226,6 +218,104 @@ namespace EBoutique.Controllers
              });
              return Json(value, JsonRequestBehavior.AllowGet);
          }*/
+
+        //debut partie utilisateur
+        public JsonResult GetUsers()
+        {
+            using (iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2())
+            {
+                var users = dc.Users.OrderBy(a => a.nom).ToList();
+                return Json(new { data = users }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        [HttpGet]
+        public ActionResult Save(int id)
+        {
+            using (iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2())
+            {
+                var u = dc.Users.Where(a => a.idUser == id).FirstOrDefault();
+                return View(u);
+
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Save(User us)
+        {
+            bool status = false;
+            if (ModelState.IsValid)
+            {
+                using (iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2())
+                {
+                    if (us.idUser > 0)
+                    {
+                        //edit
+                        var v = dc.Users.Where(a => a.idUser == us.idUser).FirstOrDefault();
+                        if (v != null)
+                        {
+                            v.nom = us.nom;
+                            v.prenom = us.prenom;
+                            v.email = us.email;
+                            v.tel = us.tel;
+                            v.ville = us.ville;
+                            v.adresse = us.adresse;
+                            v.codePostal = us.codePostal;
+                            v.datenaissance = us.datenaissance;
+                        }
+                    }
+                    else
+                    {
+                        //save
+                        dc.Users.Add(us);
+
+                    }
+                    dc.SaveChanges();
+                    status = true;
+                }
+            }
+            return RedirectToAction("ListeUsers", "home/ListeUsers");
+            //new JsonResult { Data = new { status = status } };
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            using (iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2())
+            {
+                var v = dc.Users.Where(a => a.idUser == id).FirstOrDefault();
+                if (v != null)
+                {
+                    return View(v);
+                }
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        public ActionResult DeleteUser(int id)
+        {
+            bool status = false;
+            using (iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2())
+            {
+                var v = dc.Users.Where(a => a.idUser == id).FirstOrDefault();
+                if (v != null)
+                {
+                    dc.Users.Remove(v);
+                    dc.SaveChanges();
+                    status = true;
+                }
+            }
+
+            return new JsonResult { Data = new { status = status } };
+        }
+
+        //fin partie utilisateur
 
 
     }
