@@ -458,11 +458,11 @@
                             </div>
                             <div class="form-group">
                                
-                                @Html.DropDownListFor(m => m.idCategorie, ViewBag.liste1 as SelectList, "--Selectionner une Catégorie", new { @id = "DropDwn", @class = "form-control" })
+                                @Html.DropDownListFor(m => m.idCategorie, ViewBag.liste1 as SelectList, "--Selectionner une Catégorie", new { @id = "DropDwn2", @class = "form-control" })
                             </div>
                             <div class="form-group">
                               
-                                @Html.DropDownListFor(m => m.idType, ViewBag.liste2 as SelectList, "--Selectionner un Type", new { @id = "DropDwn", @class = "form-control" })
+                                @Html.DropDownListFor(m => m.idType, ViewBag.liste2 as SelectList, "--Selectionner un Type", new { @id = "DropDwn3", @class = "form-control" })
                             </div>
                             <div class="form-group">
                                 <a href="#" class="btn btn-primary pull-right" id="SaveArticleRecord">Enregistrer</a>
@@ -500,16 +500,16 @@
                     { "data": "taille", "autoWidth": true },
                     { "data": "libelleCatgorie", "autoWidth": true },
                     {
-                        "data": "Idarticle", "render": function (data) {
+                        "data": "idArticle", "render": function (data) {
                             return '<a class="popup"  href="#" onclick = "EditArticletRecord(' + data + ')"  >Afficher</a>';
                         }},
                     {
-                        "data": "Idarticle", "width": "50px", "render": function (data) {
+                        "data": "idArticle", "width": "50px", "render": function (data) {
                             return '<a class="popup"  href="#" onclick = "EditArticletRecord(' + data + ')"  >Edit</a>';
                         }
                     },
                     {
-                        "data": "Idarticle", "width": "50px", "render": function (data) {
+                        "data": "idArticle", "width": "50px", "render": function (data) {
                             return '<a class="popup"  href="#" onclick = "DeleteArticleRecord(' + data + ')" >Delete</a>';
                         }
                     }
@@ -555,6 +555,71 @@
 
         }
         $("#SaveArticleRecord").click(function () {
+
+            var data = $("#SubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/Home/SaveDataInDatabase",
+                data: data,
+                success: function (result) {
+                    alert("Success!..");
+                    window.location.href = "/Home/ListeArticles";
+                    $("#MyModal").modal("hide");
+
+                },
+                error: function (result) {
+                    alert("echec!..");
+                }
+            })
+        })
+       /* function EditArticletRecord(m) {
+            $('#form')[0].reset();
+            $("#ArticleId").val(m);
+            $("#ModalTitle").html("Modifier l'Article");
+            //$("#ref").val('' + m);
+            $.ajax({
+                url: '/home/GetArticleById',
+                method: 'get',
+                data: { id_article: m },
+                dataType: 'json',
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    $("#ref").val(obj.refArticle);
+                    $("#couleur").val(obj.couleur);
+                    $("#libelle").val(obj.libelleArticle);
+                    $("#descri").val(obj.description);
+                    $("#prix").val(obj.prix);
+                    $("#nbpieces").val(obj.nbpieces);
+                    $("#taille").val(obj.taille);
+                    $("#DropDwn option:selected").text(obj.Marque.libelleMarque);
+                    $("#DropDwn option:selected").val(obj.idMarque);
+                    $("#DropDwn2 option:selected").text(obj.Categorie.libelleCatgorie);
+                    $("#DropDwn2 option:selected").val(obj.idCategorie);
+                    $("#DropDwn3 option:selected").text(obj.Type.libelleType);
+                    $("#DropDwn3 option:selected").val(obj.idType);
+                    $('#MyModal').modal('show');
+                   // $jQuery(this).getElementById("SaveArticleRecord").attr("id", "newId");
+
+                }
+            })
+        }*/
+       /* $("#newId").on("click", function () {
+            var data = $("#SubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/Home/SaveDataInDatabase",
+                data: data,
+                success: function (result) {
+                    alert("Success!..");
+                    window.location.href = "/Home/ListeArticles";
+                    $("#MyModal").modal("hide");
+
+                }
+            })
+       
+        });*/
+        $("SaveArticleRecord").click(function () {
+
             var data = $("#SubmitForm").serialize();
             $.ajax({
                 type: "Post",
@@ -568,6 +633,8 @@
                 }
             })
         })
+        
+        
     </script>
     <!-- Jquery JS-->
     <!-- Bootstrap JS-->
