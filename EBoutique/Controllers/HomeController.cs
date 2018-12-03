@@ -2,11 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Xml;
-using Newtonsoft.Json;
+using EBoutique.Models;
+using System.Data.Entity.Core.Objects;
 
 namespace EBoutique.Controllers
 {
@@ -22,30 +23,23 @@ namespace EBoutique.Controllers
             return View();
 
         }
-        public ActionResult Admin()
+        public ActionResult User()
         {
             return View();
         }
-        public ActionResult ListeUsers()
-        {
-            return View();
-        }
-        public ActionResult ListeArticles()
+        public ActionResult Tables()
         {
             // IEnumerable<Marque> marque = dc.Marques.ToList();
             var getmarqueslist = dc.Marques.ToList();
             SelectList l = new SelectList(getmarqueslist, "idMarque", "libelleMarque");
             ViewBag.liste = l;
-            var getcategorielist = dc.Categories.ToList();
-            SelectList l1 = new SelectList(getcategorielist, "idCategorie", "libelleCatgorie");
-            ViewBag.liste1 = l1;
-
-            var gettypelist = dc.Types.ToList();
-            SelectList l2 = new SelectList(gettypelist, "idType", "libelleType");
-            ViewBag.liste2 = l2;
             return View();
         }
         public ActionResult Home()
+        {
+            return View();
+        }
+        public ActionResult Panier()
         {
             return View();
         }
@@ -85,7 +79,7 @@ namespace EBoutique.Controllers
         }
         public static List<SelectListItem> GetDropDown()
         {
-            iBoutiqureDBEntities dc = new iBoutiqureDBEntities();
+            iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2();
             List<SelectListItem> ls = new List<SelectListItem>();
             lm =dc.Marques;
             foreach (var temp in lm)
@@ -95,82 +89,59 @@ namespace EBoutique.Controllers
             return ls;
         }
 
-        public JsonResult GetUsers()
+        public ActionResult Login()
         {
-            using (iBoutiqureDBEntities dc = new iBoutiqureDBEntities())
-            {
-                var users = dc.Users.OrderBy(a => a.nom).ToList();
-                return Json(new { data = users }, JsonRequestBehavior.AllowGet);
-            }
-
+            return View();
         }
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        public ActionResult Commande()
+        {
+            iBoutiqureDBEntities2 db = new iBoutiqureDBEntities2();
+            return View(db.fundisplay());
+        }
+
         [HttpPost]
-        public JsonResult SaveDataInDatabase(ArticleViewModel model)
+        public ActionResult Delete(int id)
         {
-            var result = false;
-            try
+            using (iBoutiqureDBEntities2 db = new iBoutiqureDBEntities2())
             {
-                if (model.idArticle > 0)
-                {
-                    Article art = dc.Articles.SingleOrDefault(x => x.disponibilite == true && x.idArticle == model.idArticle);
-                    art.description = model.description;
-                    art.refArticle = model.refArticle;
-                    art.libelleArticle = model.libelleArticle;
-                    art.prix = model.prix;
-                    art.nbpieces = model.nbpieces;
-                    art.couleur = model.couleur;
-                    art.taille = model.taille;
-                    art.idCategorie = model.idCategorie;
-                    art.idType = model.idType;
-                    art.idMarque = model.idMarque;
-                    dc.SaveChanges();
-                    result = true;
-                }
-                else
-                {
-                    Article art = new Article();
-                    art.description = model.description;
-                    art.refArticle = model.refArticle;
-                    art.libelleArticle = model.libelleArticle;
-                    art.prix = model.prix;
-                    art.nbpieces = model.nbpieces;
-                    art.couleur = model.couleur;
-                    art.taille = model.taille;
-                    art.idCategorie = model.idCategorie;
-                    art.idType = model.idType;
-                    art.idMarque = model.idMarque;
-                    art.disponibilite = false;
-                    dc.Articles.Add(art);
-                    dc.SaveChanges();
-                    result = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
 
-            return Json(result, JsonRequestBehavior.AllowGet);
+
+            {
+                Commande cmd = db.Commandes.Where(x => x.idCommande == id).FirstOrDefault<Commande>();
+                db.Commandes.Remove(cmd);
+                db.SaveChanges();
+                return Json(new { success = true, message = "Deleted Successfully" }, JsonRequestBehavior.AllowGet);
+            }
+        
+
+
+
+
+
+
+        //Commande cmd = db.Commandes.Where(x => x.idCommande == id).FirstOrDefault<Commande>();
+
+        //iBoutiqureDBEntities2 db = new iBoutiqureDBEntities2();
+        // var cmd=db.supprimer(id);
+
+        //return Ok(cmd);
+    }
         }
 
+        //private ActionResult Ok(ObjectResult<Commande> cmd)
+        //{
+        //    throw new NotImplementedException();
+        //    ;
+        //}
+        
 
-        public JsonResult GetArticleById(int id_article)
-        {
-            Article model = dc.Articles.Where(x => x.idArticle == id_article).SingleOrDefault();
-            string value = string.Empty;
-            //  return Json(new { data = model }, JsonRequestBehavior.AllowGet);
-            //
-            //value =JsonConvert.
-            value = JsonConvert.SerializeObject(model,  new JsonSerializerSettings
-            {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            });
-            return Json(value, JsonRequestBehavior.AllowGet);
-        }
-
-
+        
 
 
     }
 }
- 
