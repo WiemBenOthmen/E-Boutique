@@ -6,7 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using EBoutique.Models;
+
 using System.Data.Entity.Core.Objects;
 
 namespace EBoutique.Controllers
@@ -27,14 +27,25 @@ namespace EBoutique.Controllers
         {
             return View();
         }
-        public ActionResult Tables()
+
+        public ActionResult ListeArticles()
         {
             // IEnumerable<Marque> marque = dc.Marques.ToList();
             var getmarqueslist = dc.Marques.ToList();
             SelectList l = new SelectList(getmarqueslist, "idMarque", "libelleMarque");
             ViewBag.liste = l;
+            var getcategorielist = dc.Categories.ToList();
+            SelectList l1 = new SelectList(getcategorielist, "idCategorie", "libelleCatgorie");
+            ViewBag.liste1 = l1;
+
+            var gettypelist = dc.Types.ToList();
+            SelectList l2 = new SelectList(gettypelist, "idType", "libelleType");
+            ViewBag.liste2 = l2;
             return View();
         }
+
+        
+
         public ActionResult Home()
         {
             return View();
@@ -138,9 +149,83 @@ namespace EBoutique.Controllers
         //    throw new NotImplementedException();
         //    ;
         //}
-        
 
-        
+
+
+
+
+        public JsonResult GetUsers()
+        {
+            using (iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2())
+            {
+                var users = dc.Users.OrderBy(a => a.nom).ToList();
+                return Json(new { data = users }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+        [HttpPost]
+        public JsonResult SaveDataInDatabase(ArticleViewModel model)
+        {
+            var result = false;
+            try
+            {
+                if (model.idArticle > 0)
+                {
+                    Article art = dc.Articles.SingleOrDefault(x => x.disponibilite == true && x.idArticle == model.idArticle);
+                    art.description = model.description;
+                    art.refArticle = model.refArticle;
+                    art.libelleArticle = model.libelleArticle;
+                    art.prix = model.prix;
+                    art.nbpieces = model.nbpieces;
+                    art.couleur = model.couleur;
+                    art.taille = model.taille;
+                    art.idCategorie = model.idCategorie;
+                    art.idType = model.idType;
+                    art.idMarque = model.idMarque;
+                    dc.SaveChanges();
+                    result = true;
+                }
+                else
+                {
+                    Article art = new Article();
+                    art.description = model.description;
+                    art.refArticle = model.refArticle;
+                    art.libelleArticle = model.libelleArticle;
+                    art.prix = model.prix;
+                    art.nbpieces = model.nbpieces;
+                    art.couleur = model.couleur;
+                    art.taille = model.taille;
+                    art.idCategorie = model.idCategorie;
+                    art.idType = model.idType;
+                    art.idMarque = model.idMarque;
+                    art.disponibilite = false;
+                    dc.Articles.Add(art);
+                    dc.SaveChanges();
+                    result = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
+        /* public JsonResult GetArticleById(int id_article)
+         {
+             Article model = dc.Articles.Where(x => x.idArticle == id_article).SingleOrDefault();
+             string value = string.Empty;
+             //  return Json(new { data = model }, JsonRequestBehavior.AllowGet);
+             //
+             //value =JsonConvert.
+             value = JsonConvert.SerializeObject(model,  new JsonSerializerSettings
+             {
+                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+             });
+             return Json(value, JsonRequestBehavior.AllowGet);
+         }*/
 
 
     }

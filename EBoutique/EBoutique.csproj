@@ -3251,6 +3251,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Panier.cshtml" />
+    <Content Include="Views\Home\ListeArticles.cshtml" />
     <None Include="Views\Home\Single.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
