@@ -5,11 +5,14 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml;
+using Newtonsoft.Json;
+
 namespace EBoutique.Controllers
 {
     public class HomeController : Controller
     {
-        iBoutiqureDBEntities dc = new iBoutiqureDBEntities();
+        iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2();
         private static DbSet<Marque> lm;
 
         // GET: Home
@@ -60,7 +63,7 @@ namespace EBoutique.Controllers
         }
         public JsonResult GetArticles()
         {
-            iBoutiqureDBEntities dc = new iBoutiqureDBEntities();
+            iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2();
             List<ArticleViewModel> articles = dc.Articles.Select(x => new ArticleViewModel
             {
                 idArticle = x.idArticle,
@@ -151,19 +154,23 @@ namespace EBoutique.Controllers
         }
 
 
-        /*public JsonResult GetArticleById(int AticleId)
+        public JsonResult GetArticleById(int id_article)
         {
-            Article model = dc.Articles.Where(x => x.AticleId == StudentId).SingleOrDefault();
+            Article model = dc.Articles.Where(x => x.idArticle == id_article).SingleOrDefault();
             string value = string.Empty;
-            value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
+            //  return Json(new { data = model }, JsonRequestBehavior.AllowGet);
+            //
+            //value =JsonConvert.
+            value = JsonConvert.SerializeObject(model,  new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             });
             return Json(value, JsonRequestBehavior.AllowGet);
-        }*/
+        }
 
 
 
 
     }
 }
+ 
