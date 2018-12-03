@@ -2,9 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using EBoutique.Models;
+using System.Data.Entity.Core.Objects;
+
 namespace EBoutique.Controllers
 {
     public class HomeController : Controller
@@ -19,11 +23,11 @@ namespace EBoutique.Controllers
             return View();
 
         }
-        public ActionResult ListeUsers()
+        public ActionResult User()
         {
             return View();
         }
-        public ActionResult ListeArticles()
+        public ActionResult Tables()
         {
             // IEnumerable<Marque> marque = dc.Marques.ToList();
             var getmarqueslist = dc.Marques.ToList();
@@ -32,6 +36,10 @@ namespace EBoutique.Controllers
             return View();
         }
         public ActionResult Home()
+        {
+            return View();
+        }
+        public ActionResult Panier()
         {
             return View();
         }
@@ -81,103 +89,58 @@ namespace EBoutique.Controllers
             return ls;
         }
 
-        //debut partie utilisateur
-        public JsonResult GetUsers()
+        public ActionResult Login()
         {
-            using (iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2())
-            {
-                var users = dc.Users.OrderBy(a => a.nom).ToList();
-                return Json(new { data = users }, JsonRequestBehavior.AllowGet);
-            }
-
+            return View();
+        }
+        public ActionResult Register()
+        {
+            return View();
         }
 
-        [HttpGet]
-        public ActionResult Save(int id)
+        public ActionResult Commande()
         {
-            using (iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2())
-            {   
-                var u = dc.Users.Where(a => a.idUser == id).FirstOrDefault();
-                return View(u);
-
-            }
+            iBoutiqureDBEntities2 db = new iBoutiqureDBEntities2();
+            return View(db.fundisplay());
         }
 
         [HttpPost]
-        public ActionResult Save(User us)
-        {
-            bool status = false;
-            if (ModelState.IsValid)
-            {
-                using (iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2())
-                {
-                    if (us.idUser > 0)
-                    {
-                        //edit
-                        var v = dc.Users.Where(a => a.idUser == us.idUser).FirstOrDefault();
-                        if (v != null)
-                        {
-                            v.nom = us.nom;
-                            v.prenom = us.prenom;
-                            v.email = us.email;
-                            v.tel = us.tel;
-                            v.ville = us.ville;
-                            v.adresse = us.adresse;
-                            v.codePostal = us.codePostal;
-                            v.datenaissance = us.datenaissance;
-                        }
-                    }
-                    else
-                    {
-                        //save
-                        dc.Users.Add(us);
-
-                    }
-                    dc.SaveChanges();
-                    status = true;
-                }
-            }
-            return RedirectToAction("ListeUsers", "home/ListeUsers");
-                //new JsonResult { Data = new { status = status } };
-        }
-
-        [HttpGet]
         public ActionResult Delete(int id)
         {
-            using (iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2())
+            using (iBoutiqureDBEntities2 db = new iBoutiqureDBEntities2())
             {
-                var v = dc.Users.Where(a => a.idUser == id).FirstOrDefault();
-                if (v != null)
-                {
-                    return View(v);
-                }
-                else
-                {
-                    return HttpNotFound();
-                }
+
+
+            {
+                Commande cmd = db.Commandes.Where(x => x.idCommande == id).FirstOrDefault<Commande>();
+                db.Commandes.Remove(cmd);
+                db.SaveChanges();
+                return Json(new { success = true, message = "Deleted Successfully" }, JsonRequestBehavior.AllowGet);
             }
+        
+
+
+
+
+
+
+        //Commande cmd = db.Commandes.Where(x => x.idCommande == id).FirstOrDefault<Commande>();
+
+        //iBoutiqureDBEntities2 db = new iBoutiqureDBEntities2();
+        // var cmd=db.supprimer(id);
+
+        //return Ok(cmd);
+    }
         }
 
-        [HttpPost]
-        [ActionName("Delete")]
-        public ActionResult DeleteUser(int id)
-        {
-            bool status = false;
-            using (iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2())
-            {
-                var v = dc.Users.Where(a => a.idUser == id).FirstOrDefault();
-                if (v != null)
-                {
-                    dc.Users.Remove(v);
-                    dc.SaveChanges();
-                    status = true;
-                }
-            }
+        //private ActionResult Ok(ObjectResult<Commande> cmd)
+        //{
+        //    throw new NotImplementedException();
+        //    ;
+        //}
+        
 
-            return new JsonResult { Data = new { status = status } };
-        }
-
-        //fin partie utilisateur
+        
 
 
     }

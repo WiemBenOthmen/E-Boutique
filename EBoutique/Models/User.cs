@@ -25,5 +25,6 @@ namespace EBoutique.Models
         public Nullable<int> codePostal { get; set; }
         public string ville { get; set; }
         public Nullable<System.DateTime> datenaissance { get; set; }
+        public Nullable<bool> is_valide { get; set; }
     }
 }

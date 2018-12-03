@@ -1,4 +1,5 @@
-﻿
+﻿@model EBoutique.Models.ArticleViewModel
+
 @{
     ViewBag.Title = "ListeArticles";
     Layout = null;
@@ -17,7 +18,7 @@
     <meta name="author" content="Hau Nguyen">
     <meta name="keywords" content="au theme template">
     <!-- Title Page-->
-    <title>Tables</title>
+    <title>Liste des Articles</title>
     <!-- Fontfaces CSS-->
     <link href="~/Content/asset/css/font-face.css" rel="stylesheet" media="all">
     <link href="~/Content/asset/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
@@ -33,8 +34,16 @@
     <link href="~/Content/asset/vendor/slick/slick.css" rel="stylesheet" media="all">
     <link href="~/Content/asset/vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="~/Content/asset/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- Main CSS-->
     <link href="~/Content/asset/css/theme.css" rel="stylesheet" media="all">
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+
 </head>
 <body class="animsition">
     <div class="page-wrapper">
@@ -57,106 +66,38 @@
             <nav class="navbar-mobile">
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard
+                        <li>
+                            <a href="Index">
+                                <i class="fas fa-tachometer-alt"></i>Accueil
                             </a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="index.html">Dashboard 1</a>
-                                </li>
-                                <li>
-                                    <a href="index2.html">Dashboard 2</a>
-                                </li>
-                                <li>
-                                    <a href="index3.html">Dashboard 3</a>
-                                </li>
-                                <li>
-                                    <a href="index4.html">Dashboard 4</a>
-                                </li>
-                            </ul>
                         </li>
                         <li>
                             <a href="chart.html">
-                                <i class="fas fa-chart-bar"></i>Charts
+                                <i class="fas fa-chart-bar"></i>Liste des utilisateurs
                             </a>
                         </li>
                         <li>
-                            <a href="table.html">
-                                <i class="fas fa-table"></i>Tables
+                            <a href="ListeArticles">
+                                <i class="fas fa-table"></i>Liste des Articles
                             </a>
                         </li>
                         <li>
                             <a href="form.html">
-                                <i class="far fa-check-square"></i>Forms
+                                <i class="far fa-check-square"></i>Liste des Commandes
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fas fa-calendar-alt"></i>Calendar
+                                <i class="fas fa-calendar-alt"></i>Liste des Livraison
                             </a>
                         </li>
                         <li>
                             <a href="map.html">
-                                <i class="fas fa-map-marker-alt"></i>Maps
+                                <i class="fas fa-map-marker-alt"></i>Statistiques
                             </a>
                         </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Pages
-                            </a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="login.html">Login</a>
-                                </li>
-                                <li>
-                                    <a href="register.html">Register</a>
-                                </li>
-                                <li>
-                                    <a href="forget-pass.html">Forget Password</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-desktop"></i>UI Elements
-                            </a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="button.html">Button</a>
-                                </li>
-                                <li>
-                                    <a href="badge.html">Badges</a>
-                                </li>
-                                <li>
-                                    <a href="tab.html">Tabs</a>
-                                </li>
-                                <li>
-                                    <a href="card.html">Cards</a>
-                                </li>
-                                <li>
-                                    <a href="alert.html">Alerts</a>
-                                </li>
-                                <li>
-                                    <a href="progress-bar.html">Progress Bars</a>
-                                </li>
-                                <li>
-                                    <a href="modal.html">Modals</a>
-                                </li>
-                                <li>
-                                    <a href="switch.html">Switchs</a>
-                                </li>
-                                <li>
-                                    <a href="grid.html">Grids</a>
-                                </li>
-                                <li>
-                                    <a href="fontawesome.html">Fontawesome Icon</a>
-                                </li>
-                                <li>
-                                    <a href="typo.html">Typography</a>
-                                </li>
-                            </ul>
-                        </li>
+
+
                     </ul>
                 </div>
             </nav>
@@ -392,101 +333,311 @@
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                      
-                      
-                       
-                        <div class="row m-t-30">
-                            <div class="col-md-12">
-                                <!-- DATA TABLE-->
-                                <div class="table-responsive m-b-40">
-                                    <table class="table table-borderless table-data3">
-                                        <thead>
-                                            <tr>
-                                                <th>date</th>
-                                                <th>type</th>
-                                                <th>description</th>
-                                                <th>status</th>
-                                                <th>price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>2018-09-29 05:57</td>
-                                                <td>Mobile</td>
-                                                <td>iPhone X 64Gb Grey</td>
-                                                <td class="process">Processed</td>
-                                                <td>$999.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-28 01:22</td>
-                                                <td>Mobile</td>
-                                                <td>Samsung S8 Black</td>
-                                                <td class="process">Processed</td>
-                                                <td>$756.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-27 02:12</td>
-                                                <td>Game</td>
-                                                <td>Game Console Controller</td>
-                                                <td class="denied">Denied</td>
-                                                <td>$22.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-26 23:06</td>
-                                                <td>Mobile</td>
-                                                <td>iPhone X 256Gb Black</td>
-                                                <td class="denied">Denied</td>
-                                                <td>$1199.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-25 19:03</td>
-                                                <td>Accessories</td>
-                                                <td>USB 3.0 Cable</td>
-                                                <td class="process">Processed</td>
-                                                <td>$10.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-29 05:57</td>
-                                                <td>Accesories</td>
-                                                <td>Smartwatch 4.0 LTE Wifi</td>
-                                                <td class="denied">Denied</td>
-                                                <td>$199.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-24 19:10</td>
-                                                <td>Camera</td>
-                                                <td>Camera C430W 4k</td>
-                                                <td class="process">Processed</td>
-                                                <td>$699.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-22 00:43</td>
-                                                <td>Computer</td>
-                                                <td>Macbook Pro Retina 2017</td>
-                                                <td class="process">Processed</td>
-                                                <td>$10.00</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- END DATA TABLE-->
-                            </div>
+                    <div class="box" style="position: relative;border-radius: 3px;
+    background: #ffffff;
+    border-top: 3px solid #d2d6de;
+    margin-bottom: 20px;
+    width: 100%;overflow: auto;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1)">
+                        <div class="box-header" style="color: #444;
+    display: block;
+    padding: 10px;
+    position: relative;">
+                            <h3 class="box-title">Liste des Articles</h3>
+                            <button class="btn btn-success" onclick="AddNewArticle(0)" style="margin-top:10px; border-radius:20px; width:120px;"><i class="fa fa-plus-circle"></i>      Ajouter</button>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="copyright">
-                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                        <!-- /.box-header -->
+                        <div class="box-body text-nowrap" style="    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    padding: 10px;">
+                            <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap" style=" border-top-left-radius:3em;">
+                                <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
+                                    <div class="col-sm-12">
+                                        <table id="table" class="table  table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                            <thead style="color: white;background-color: #0080ff;">
+                                                <tr role="row">
+                                                    <th>Reference Article</th>
+                                                    <th>Libelle</th>
+                                                    <th>Prix</th>
+                                                    <th>Description</th>
+                                                    <th>Disponibilite</th>
+                                                    <th>Nombre pièces</th>
+                                                    <th>Type</th>
+                                                    <th>Marque</th>
+                                                    <th>Couleur</th>
+                                                    <th>Taille</th>
+                                                    <th>Catégorie</th>
+                                                    <th>Image(s)</th>
+                                                    <th></th>
+                                                    <th></th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr role="row" class="odd">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- /.box-body -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="modal fade" id="MyModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 id="ModalTitle" style="font-weight:bold;"></h4>
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+
+                </div>
+                <div class="modal-body">
+                    <form id="form" method="post">
+                        <fieldset id="SubmitForm">
+                            @Html.HiddenFor(m => m.idArticle, new { @id = "ArticleId" })
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.refArticle, new { @id = "ref", @class = "form-control", @placeholder = "Réference Article" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.libelleArticle, new { @id = "libelle", @class = "form-control", @placeholder = "Libelle" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.description, new { @id = "descri", @class = "form-control", @placeholder = "Description" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.prix, new { @id = "prix", @class = "form-control", @placeholder = "Prix" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.nbpieces, new { @id = "nbpieces", @class = "form-control", @placeholder = "Nombre de pièces" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m=>m.couleur,new { @id = "couleur", @class = "form-control", @placeholder = "Couleur" })
+                            </div>
+                            <div class="form-group">
+
+                                @*    <select name="taille">
+            <option>36</option>
+            <option>38</option>
+            <option>40</option>
+            <option>42</option>
+            <option>44</option>
+            <option>46</option>
+
+        </select>
+                                *@
+                                @Html.TextBoxFor(m => m.taille, new { @id = "taille", @class = "form-control", @placeholder = "Taille" })
+
+                            </div>
+                            <div class="form-group">
+                                @if (ViewBag.liste != null)
+                                {@Html.DropDownListFor(m=>m.idMarque, ViewBag.liste as SelectList, "--Selectionner une Marque--", new { @id = "DropDwn", @class = "form-control" })
+                            }
+                            </div>
+                            <div class="form-group">
+                               
+                                @Html.DropDownListFor(m => m.idCategorie, ViewBag.liste1 as SelectList, "--Selectionner une Catégorie", new { @id = "DropDwn2", @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                              
+                                @Html.DropDownListFor(m => m.idType, ViewBag.liste2 as SelectList, "--Selectionner un Type", new { @id = "DropDwn3", @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                <a href="#" class="btn btn-primary pull-right" id="SaveArticleRecord">Enregistrer</a>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        /*var myObj = { "name": "John", "age": 31, "address": "123 Street", "city": "New York" };
+        var data = [myObj];//JSON.stringify(myObj);*/
+        $(document).ready(function () {
+            //alert('heloo');
+            var oTable = $('#table').DataTable({
+                "ajax": {
+                    "url": '/home/GetArticles',
+                    "type": "get",
+                    "datatype": "json"
+                },
+                /*"ordering": true,
+                "data": data,*/
+                "columns": [
+                    { "data": "refArticle", "autoWidth": true },
+                    { "data": "libelleArticle", "autoWidth": true },
+                    { "data": "prix", "autoWidth": true },
+                    { "data": "description", "autoWidth": true },
+                    { "data": "disponibilite", "autoWidth": true },
+                    { "data": "nbpieces", "autoWidth": true },
+                    { "data": "libelleType", "autoWidth": true },
+                    { "data": "libelleMarque", "autoWidth": true },
+                    { "data": "couleur", "autoWidth": true },
+                    { "data": "taille", "autoWidth": true },
+                    { "data": "libelleCatgorie", "autoWidth": true },
+                    {
+                        "data": "idArticle", "render": function (data) {
+                            return '<a class="popup"  href="#" onclick = "EditArticletRecord(' + data + ')"  >Afficher</a>';
+                        }},
+                    {
+                        "data": "idArticle", "width": "50px", "render": function (data) {
+                            return '<a class="popup"  href="#" onclick = "EditArticletRecord(' + data + ')"  >Edit</a>';
+                        }
+                    },
+                    {
+                        "data": "idArticle", "width": "50px", "render": function (data) {
+                            return '<a class="popup"  href="#" onclick = "DeleteArticleRecord(' + data + ')" >Delete</a>';
+                        }
+                    }
+                    /* { "data": "Idcouleur", "autoWidth": true },
+                     { "data": "libelle_couleur", "autoWidth": true },*/
+
+                ]
+                /*  "columns": [
+                      { 'data': 'name' },
+                      { 'data': 'age' },
+                      { 'data': 'address' },
+                      { 'data': 'city' }
+                  ]*/
+            });
+            //  document.getElementsByClassName("dataTables_filter").style.background-color="blue";
+            // document.getElementsByClassName("dataTables_filter").children().eq(1).css("color:blue");
+            //$("#table_filter").css("margin_bottom:50px;")
+            $(".dataTables_filter input").addClass('custom');
+            $(".dataTables_filter input").css('margin_bottom:20px;');
+            //   $(".dataTables_filter label").addStyle(" background-color: red;");
+
+            /* $('#add_data').click(function () {
+                 // alert('aaaa');
+                 $('#MyModal').modal('show');
+                 $('#form')[0].reset();
+
+
+                 $("#ModalTitle").html("Ajouter un article");
+             });*/
+
+        });
+        function AddNewArticle(StudentId) {
+            /* $("#form")[0].reset();
+
+             $("#DropDwn option:selected").text("--Select Dept--");
+             $("#ModalTitle").html("Add New Student");
+             $("#MyModal").modal();*/
+
+            $('#form')[0].reset();
+            $("#ArticleId").val(0);
+            $("#ModalTitle").html("Ajouter un nouveau Article");
+            $('#MyModal').modal('show');
+
+        }
+        function EditArticletRecord(m) {
+            $('#form')[0].reset();
+            $("#ArticleId").val(m);
+            $("#ModalTitle").html("Modifier l'Article");
+            //$("#ref").val('' + m);
+            $.ajax({
+                url: '/home/GetArticleById',
+                method: 'get',
+                data: { id_article: m },
+                dataType: 'json',
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    $("#ref").val(obj.refArticle);
+                    $("#couleur").val(obj.couleur);
+                    $("#libelle").val(obj.libelleArticle);
+                    $("#descri").val(obj.description);
+                    $("#prix").val(obj.prix);
+                    $("#nbpieces").val(obj.nbpieces);
+                    $("#taille").val(obj.taille);
+                    $("#DropDwn option:selected").text(obj.Marque.libelleMarque);
+                    $("#DropDwn option:selected").val(obj.idMarque);
+                    $("#DropDwn2 option:selected").text(obj.Categorie.libelleCatgorie);
+                    $("#DropDwn2 option:selected").val(obj.idCategorie);
+                    $("#DropDwn3 option:selected").text(obj.Type.libelleType);
+                    $("#DropDwn3 option:selected").val(obj.idType);
+                    $('#MyModal').modal('show');
+                   // $jQuery(this).getElementById("SaveArticleRecord").attr("id", "newId");
+
+                }
+            })
+        }
+        $("#SaveArticleRecord").click(function () {
+
+            var data = $("#SubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/Home/SaveDataInDatabase",
+                data: data,
+                success: function (result) {
+                    alert("Success!..");
+                    window.location.href = "/Home/ListeArticles";
+                    $("#MyModal").modal("hide");
+
+                },
+                error: function (result) {
+                    alert("echec!..");
+                }
+            })
+        })
+       
+       /* $("#newId").on("click", function () {
+            var data = $("#SubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/Home/SaveDataInDatabase",
+                data: data,
+                success: function (result) {
+                    alert("Success!..");
+                    window.location.href = "/Home/ListeArticles";
+                    $("#MyModal").modal("hide");
+
+                }
+            })
+       
+        });*/
+        $("SaveArticleRecord").click(function () {
+
+            var data = $("#SubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/Home/SaveDataInDatabase",
+                data: data,
+                success: function (result) {
+                    alert("Success!..");
+                    window.location.href = "/Home/ListeArticles";
+                    $("#MyModal").modal("hide");
+
+                }
+            })
+        })
+        
+        
+    </script>
     <!-- Jquery JS-->
-    <script src="~/Content/asset/vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
     <script src="~/Content/asset/vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="~/Content/asset/vendor/bootstrap-4.1/bootstrap.min.js"></script>
