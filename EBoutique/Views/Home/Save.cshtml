@@ -1,0 +1,66 @@
+﻿@model EBoutique.Models.User
+
+<h2>Save</h2>
+@using (Html.BeginForm("save", "home", FormMethod.Post, new { id = "#popupForm" }))
+{
+    if (Model != null && Model.idUser > 0)
+    {
+        @Html.HiddenFor(a => a.idUser)
+    }
+
+    <div class="form-group">
+        <label>Nom</label>
+        @Html.TextBoxFor(a => a.nom, new { @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.nom)
+    </div>
+
+    <div class="form-group">
+        <label>Prenom</label>
+        @Html.TextBoxFor(a => a.prenom, new { @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.prenom)
+    </div>
+
+    <div class="form-group">
+        <label>E-mail</label>
+        @Html.TextBoxFor(a => a.email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.email)
+    </div>
+
+    <div class="form-group">
+        <label>Téléphone</label>
+        @Html.TextBoxFor(a => a.tel, new { @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.tel)
+    </div>
+
+    <div class="form-group">
+        <label>Ville</label>
+        @Html.TextBoxFor(a => a.ville, new { @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.ville)
+    </div>
+
+    <div class="form-group">
+        <label>Adresse</label>
+        @Html.TextBoxFor(a => a.adresse, new { @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.adresse)
+    </div>
+
+
+    <div class="form-group">
+        <label>CodePostal</label>
+        @Html.TextBoxFor(a => a.codePostal, new { @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.codePostal)
+    </div>
+
+    <div class="form-group">
+        <label>Date de naissance</label>
+        @Html.TextBoxFor(a => a.datenaissance, new { @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.datenaissance)
+    </div>
+
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+}
+
+
+
