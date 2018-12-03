@@ -105,7 +105,7 @@ namespace EBoutique.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(int id)
+        public ActionResult DeleteCmd(int id)
         {
             using (iBoutiqureDBEntities2 db = new iBoutiqureDBEntities2())
             {
