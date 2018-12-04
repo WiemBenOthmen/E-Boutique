@@ -3245,6 +3245,7 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\Home\Commande.cshtml" />
+    <Content Include="Views\Home\Delete.cshtml" />
     <None Include="Views\Home\Home.cshtml" />
     <None Include="Views\Home\Contact.cshtml" />
     <None Include="Views\Home\Categories.cshtml" />
@@ -3252,6 +3253,8 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Panier.cshtml" />
     <Content Include="Views\Home\ListeArticles.cshtml" />
+    <Content Include="Views\Home\ListeUsers.cshtml" />
+    <Content Include="Views\Home\Save.cshtml" />
     <None Include="Views\Home\Single.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -3294,6 +3297,7 @@
     <Compile Include="Models\displaycmd_Result.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\extended\User.cs" />
     <Compile Include="Models\Marque.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>

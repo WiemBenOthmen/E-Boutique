@@ -557,11 +557,11 @@
         <i class="zmdi zmdi-delete"></i>
     </button>
     <script>function Delete(id) {
-            if(confirm('Are You Sure to Delete this Employee Record ?'))
+            if(confirm('Voulez vous vraiment supprimer cette commande?'))
             {
                 $.ajax({
                     type: "POST",
-                    url: '@Url.Action("Delete","Home")/' + id,
+                    url: '@Url.Action("DeleteCmd","Home")/' + id,
                     success: function (data) {
                         if (data.success)
                         {
