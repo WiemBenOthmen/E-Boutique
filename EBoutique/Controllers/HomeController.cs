@@ -6,7 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Newtonsoft.Json;
 using System.Data.Entity.Core.Objects;
 
 namespace EBoutique.Controllers
@@ -213,7 +213,7 @@ namespace EBoutique.Controllers
         }
 
 
-        /* public JsonResult GetArticleById(int id_article)
+         public JsonResult GetArticleById(int id_article)
          {
              Article model = dc.Articles.Where(x => x.idArticle == id_article).SingleOrDefault();
              string value = string.Empty;
@@ -225,7 +225,7 @@ namespace EBoutique.Controllers
                  ReferenceLoopHandling = ReferenceLoopHandling.Ignore
              });
              return Json(value, JsonRequestBehavior.AllowGet);
-         }*/
+         }
 
 
     }

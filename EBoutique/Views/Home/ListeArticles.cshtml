@@ -554,25 +554,7 @@
             $('#MyModal').modal('show');
 
         }
-        $("#SaveArticleRecord").click(function () {
-
-            var data = $("#SubmitForm").serialize();
-            $.ajax({
-                type: "Post",
-                url: "/Home/SaveDataInDatabase",
-                data: data,
-                success: function (result) {
-                    alert("Success!..");
-                    window.location.href = "/Home/ListeArticles";
-                    $("#MyModal").modal("hide");
-
-                },
-                error: function (result) {
-                    alert("echec!..");
-                }
-            })
-        })
-       /* function EditArticletRecord(m) {
+          function EditArticletRecord(m) {
             $('#form')[0].reset();
             $("#ArticleId").val(m);
             $("#ModalTitle").html("Modifier l'Article");
@@ -602,7 +584,26 @@
 
                 }
             })
-        }*/
+        }
+        $("#SaveArticleRecord").click(function () {
+
+            var data = $("#SubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/Home/SaveDataInDatabase",
+                data: data,
+                success: function (result) {
+                    alert("Success!..");
+                    window.location.href = "/Home/ListeArticles";
+                    $("#MyModal").modal("hide");
+
+                },
+                error: function (result) {
+                    alert("echec!..");
+                }
+            })
+        })
+      
        /* $("#newId").on("click", function () {
             var data = $("#SubmitForm").serialize();
             $.ajax({
