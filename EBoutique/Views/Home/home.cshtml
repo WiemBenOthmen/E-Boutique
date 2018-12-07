@@ -171,14 +171,68 @@
 	<div class="main_slider" style="background-image:url(assetss/images/slider_1.jpg)">
 		<div class="container fill_height">
 			<div class="row align-items-center fill_height">
-				<div class="col">
+				<div class="col-sm-9">
 					<div class="main_slider_content">
 						<h6>Spring / Summer Collection 2017</h6>
 						<h1>Get up to 30% Off New Arrivals</h1>
 						<div class="red_button shop_now_button"><a href="#">shop now</a></div>
 					</div>
 				</div>
-			</div>
+                <div class="col-sm-3">
+                        <!-- DIRECT CHAT WARNING -->
+                        <div class="box box-warning direct-chat direct-chat-warning" style="position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    border-top: 3px solid #d2d6de;
+    margin-bottom: 20px;
+    width: 100%;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); border-top-color: #f39c12; border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    position: relative;
+    overflow-x: hidden;
+    padding: 0;
+    
+     ">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Direct Chat</h3>
+
+                                <div class="box-tools pull-right">
+                                    <span data-toggle="tooltip" title="3 New Messages" class="badge bg-yellow">3</span>
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle">
+                                        <i class="fa fa-comments"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                </div>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <!-- Conversations are loaded here -->
+                                <div class="direct-chat-messages" >
+                                    <div id="discussion" style="height: 300px; border: 1px solid gray;">
+
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                            <div class="box-footer">
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" name="message" id="msg" placeholder="Type Message ..." class="form-control">
+                                        <span class="input-group-btn">
+                                            <button type="submit" id="send" class="btn btn-warning btn-flat" onclick="affichegemessages()" >Send</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.box-footer-->
+                        </div>
+                        <!--/.direct-chat -->
+                    </div>
+                </div>
 		</div>
 	</div>
 
@@ -806,7 +860,23 @@
 	</footer>
 
 </div>
+    <script>
+        function affichegemessages() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById('discussion').innerHTML += this.responseText;
 
+                }
+            };
+            var msg = document.getElementById('msg').value;
+            document.getElementById('discussion').innerHTML += "<p> You: " + msg + " </p> <br>";
+            var link = "@Url.Action("ChatBot", "Home", new { attr = "var" })";
+            link = link.replace('var', msg);
+            xmlhttp.open("POST", link, true);
+            xmlhttp.send();
+       }
+    </script>
 <script src="~/Content/assetss/js/jquery-3.2.1.min.js"></script>
 <script src="~/Content/assetss/styles/bootstrap4/popper.js"></script>
 <script src="~/Content/assetss/styles/bootstrap4/bootstrap.min.js"></script>
