@@ -170,6 +170,7 @@
     <Content Include="Content\assetss\styles\bootstrap4\popper.js" />
     <Content Include="Content\assetss\styles\categories_responsive.css" />
     <Content Include="Content\assetss\styles\categories_styles.css" />
+    <Content Include="Content\assetss\styles\Chatbot.css" />
     <Content Include="Content\assetss\styles\contact_responsive.css" />
     <Content Include="Content\assetss\styles\contact_styles.css" />
     <Content Include="Content\assetss\styles\main_styles.css" />
