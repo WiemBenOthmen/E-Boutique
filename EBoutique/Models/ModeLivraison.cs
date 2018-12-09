@@ -12,23 +12,19 @@ namespace EBoutique.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Admin
+    public partial class ModeLivraison
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Admin()
+        public ModeLivraison()
         {
-            this.Articles = new HashSet<Article>();
+            this.Livraisons = new HashSet<Livraison>();
         }
     
-        public int idAdmin { get; set; }
-        public string login { get; set; }
-        public string nom { get; set; }
-        public string prenom { get; set; }
-        public string email { get; set; }
-        public string mdp { get; set; }
-        public string tel { get; set; }
+        public int idmodelivraison { get; set; }
+        public string libelleliv { get; set; }
+        public string modelivraison1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Article> Articles { get; set; }
+        public virtual ICollection<Livraison> Livraisons { get; set; }
     }
 }

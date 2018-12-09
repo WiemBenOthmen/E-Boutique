@@ -3103,13 +3103,6 @@
     <Content Include="Content\asset\vendor\slick\slick-theme.scss" />
     <Content Include="Content\asset\vendor\slick\slick.less" />
     <Content Include="Content\asset\vendor\slick\slick.scss" />
-    <EntityDeploy Include="Models\DBModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DBModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DBModel.edmx.diagram">
-      <DependentUpon>DBModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\assets\fonts\elegant-font\html-css\fonts\ElegantIcons.eot" />
     <Content Include="Content\assets\fonts\elegant-font\html-css\fonts\ElegantIcons.ttf" />
     <Content Include="Content\assets\fonts\elegant-font\html-css\fonts\ElegantIcons.woff" />
@@ -3223,6 +3216,13 @@
     <Content Include="Content\assets\vendor\slick\slick-theme.scss" />
     <Content Include="Content\assets\vendor\slick\slick.less" />
     <Content Include="Content\assets\vendor\slick\slick.scss" />
+    <EntityDeploy Include="Models\DBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DBModel.edmx.diagram">
+      <DependentUpon>DBModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -3246,6 +3246,7 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\Home\Commande.cshtml" />
     <Content Include="Views\Home\Delete.cshtml" />
+    <Content Include="Views\Home\chatbot.cshtml" />
     <None Include="Views\Home\Home.cshtml" />
     <None Include="Views\Home\Contact.cshtml" />
     <None Include="Views\Home\Categories.cshtml" />
@@ -3255,6 +3256,8 @@
     <Content Include="Views\Home\ListeArticles.cshtml" />
     <Content Include="Views\Home\ListeUsers.cshtml" />
     <Content Include="Views\Home\Save.cshtml" />
+    <Content Include="Views\Home\LoginAdmin.cshtml" />
+    <Content Include="Views\Home\RegisterAdmin.cshtml" />
     <None Include="Views\Home\Single.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -3297,8 +3300,23 @@
     <Compile Include="Models\displaycmd_Result.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EtatCommande.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\extended\User.cs" />
+    <Compile Include="Models\Facture.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LigneCommande.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Livraison.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Marque.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModeLivraison.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">

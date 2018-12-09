@@ -14,6 +14,13 @@ namespace EBoutique.Models
     
     public partial class Article
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Article()
+        {
+            this.LigneCommandes = new HashSet<LigneCommande>();
+            this.LigneCommandes1 = new HashSet<LigneCommande>();
+        }
+    
         public int idArticle { get; set; }
         public string refArticle { get; set; }
         public string libelleArticle { get; set; }
@@ -33,5 +40,9 @@ namespace EBoutique.Models
         public virtual Categorie Categorie { get; set; }
         public virtual Marque Marque { get; set; }
         public virtual Type Type { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LigneCommande> LigneCommandes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LigneCommande> LigneCommandes1 { get; set; }
     }
 }

@@ -10,14 +10,17 @@
 namespace EBoutique.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class displaycmd_Result
+    public partial class LigneCommande
     {
-        public int idCommande { get; set; }
-        public Nullable<System.DateTime> datecommande { get; set; }
-        public Nullable<int> totalcommande { get; set; }
-        public string descriptionCmd { get; set; }
-        public Nullable<int> idUser { get; set; }
-        public Nullable<int> id_etat_commande { get; set; }
+        public Nullable<int> idarticle { get; set; }
+        public Nullable<int> idcommande { get; set; }
+        public Nullable<decimal> qtecmde { get; set; }
+        public int idlignecommande { get; set; }
+    
+        public virtual Article Article { get; set; }
+        public virtual Article Article1 { get; set; }
+        public virtual Commande Commande { get; set; }
     }
 }

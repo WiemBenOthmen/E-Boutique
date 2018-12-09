@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="iBoutiqureDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="iBoutiqureDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="idAdmin" />
@@ -49,10 +49,49 @@
             <PropertyRef Name="idCommande" />
           </Key>
           <Property Name="idCommande" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="datecommande" Type="date" />
+          <Property Name="totalcommande" Type="int" />
+          <Property Name="descriptionCmd" Type="varchar" MaxLength="50" />
+          <Property Name="idUser" Type="int" />
+          <Property Name="id_etat_commande" Type="int" />
+        </EntityType>
+        <EntityType Name="EtatCommande">
+          <Key>
+            <PropertyRef Name="id_etat_commande" />
+          </Key>
+          <Property Name="id_etat_commande" Type="int" Nullable="false" />
+          <Property Name="libelle_etat_cmd" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Facture">
+          <Key>
+            <PropertyRef Name="idfacture" />
+          </Key>
+          <Property Name="idfacture" Type="int" Nullable="false" />
+          <Property Name="idCommande" Type="int" />
+          <Property Name="dateFacture" Type="date" />
+          <Property Name="TVA" Type="float" />
+          <Property Name="remise" Type="int" />
+          <Property Name="total" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="totalttc" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="LigneCommande">
+          <Key>
+            <PropertyRef Name="idlignecommande" />
+          </Key>
+          <Property Name="idarticle" Type="int" />
+          <Property Name="idcommande" Type="int" />
+          <Property Name="qtecmde" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="idlignecommande" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Livraison">
+          <Key>
+            <PropertyRef Name="idlivraison" />
+          </Key>
+          <Property Name="idlivraison" Type="int" Nullable="false" />
           <Property Name="date" Type="date" />
-          <Property Name="adresseLivraison" Type="varchar" MaxLength="50" />
-          <Property Name="detailLivraison" Type="varchar" MaxLength="50" />
-          <Property Name="dateLivraison" Type="date" />
+          <Property Name="description" Type="nvarchar" MaxLength="100" />
+          <Property Name="idmodelivraison" Type="int" />
+          <Property Name="idCommande" Type="int" />
         </EntityType>
         <EntityType Name="Marque">
           <Key>
@@ -61,6 +100,14 @@
           <Property Name="idMarque" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="libelleMarque" Type="varchar" MaxLength="100" />
           <Property Name="nbfoisMarque" Type="int" />
+        </EntityType>
+        <EntityType Name="ModeLivraison">
+          <Key>
+            <PropertyRef Name="idmodelivraison" />
+          </Key>
+          <Property Name="idmodelivraison" Type="int" Nullable="false" />
+          <Property Name="libelleliv" Type="nvarchar" MaxLength="50" />
+          <Property Name="modelivraison" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -145,6 +192,114 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Commande_Commande">
+          <End Role="Commande" Type="Self.Commande" Multiplicity="0..1" />
+          <End Role="Commande1" Type="Self.Commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commande">
+              <PropertyRef Name="idCommande" />
+            </Principal>
+            <Dependent Role="Commande1">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Commande_Commande1">
+          <End Role="Commande" Type="Self.Commande" Multiplicity="0..1" />
+          <End Role="Commande1" Type="Self.Commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commande">
+              <PropertyRef Name="idCommande" />
+            </Principal>
+            <Dependent Role="Commande1">
+              <PropertyRef Name="id_etat_commande" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facture_Commande">
+          <End Role="Commande" Type="Self.Commande" Multiplicity="0..1" />
+          <End Role="Facture" Type="Self.Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commande">
+              <PropertyRef Name="idCommande" />
+            </Principal>
+            <Dependent Role="Facture">
+              <PropertyRef Name="idCommande" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LigneCommande_Article">
+          <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+          <End Role="LigneCommande" Type="Self.LigneCommande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="idArticle" />
+            </Principal>
+            <Dependent Role="LigneCommande">
+              <PropertyRef Name="idarticle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LigneCommande_Article1">
+          <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+          <End Role="LigneCommande" Type="Self.LigneCommande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="idArticle" />
+            </Principal>
+            <Dependent Role="LigneCommande">
+              <PropertyRef Name="idarticle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LigneCommande_Commande">
+          <End Role="Commande" Type="Self.Commande" Multiplicity="0..1" />
+          <End Role="LigneCommande" Type="Self.LigneCommande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commande">
+              <PropertyRef Name="idCommande" />
+            </Principal>
+            <Dependent Role="LigneCommande">
+              <PropertyRef Name="idcommande" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Livraison_Commande">
+          <End Role="Commande" Type="Self.Commande" Multiplicity="0..1" />
+          <End Role="Livraison" Type="Self.Livraison" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commande">
+              <PropertyRef Name="idCommande" />
+            </Principal>
+            <Dependent Role="Livraison">
+              <PropertyRef Name="idCommande" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Livraison_Livraison">
+          <End Role="Livraison" Type="Self.Livraison" Multiplicity="1" />
+          <End Role="Livraison1" Type="Self.Livraison" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Livraison">
+              <PropertyRef Name="idlivraison" />
+            </Principal>
+            <Dependent Role="Livraison1">
+              <PropertyRef Name="idlivraison" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Livraison_ModeLivraison">
+          <End Role="ModeLivraison" Type="Self.ModeLivraison" Multiplicity="0..1" />
+          <End Role="Livraison" Type="Self.Livraison" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModeLivraison">
+              <PropertyRef Name="idmodelivraison" />
+            </Principal>
+            <Dependent Role="Livraison">
+              <PropertyRef Name="idmodelivraison" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="deleteCmd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idCommande" Type="int" Mode="In" />
         </Function>
@@ -185,7 +340,12 @@
           <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categorie" EntityType="Self.Categorie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Commande" EntityType="Self.Commande" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EtatCommande" EntityType="Self.EtatCommande" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facture" EntityType="Self.Facture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LigneCommande" EntityType="Self.LigneCommande" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Livraison" EntityType="Self.Livraison" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Marque" EntityType="Self.Marque" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModeLivraison" EntityType="Self.ModeLivraison" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
@@ -205,8 +365,45 @@
             <End Role="Type" EntitySet="Type" />
             <End Role="Article" EntitySet="Article" />
           </AssociationSet>
+          <AssociationSet Name="FK_Commande_Commande" Association="Self.FK_Commande_Commande">
+            <End Role="Commande" EntitySet="Commande" />
+            <End Role="Commande1" EntitySet="Commande" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Commande_Commande1" Association="Self.FK_Commande_Commande1">
+            <End Role="Commande" EntitySet="Commande" />
+            <End Role="Commande1" EntitySet="Commande" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facture_Commande" Association="Self.FK_Facture_Commande">
+            <End Role="Commande" EntitySet="Commande" />
+            <End Role="Facture" EntitySet="Facture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LigneCommande_Article" Association="Self.FK_LigneCommande_Article">
+            <End Role="Article" EntitySet="Article" />
+            <End Role="LigneCommande" EntitySet="LigneCommande" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LigneCommande_Article1" Association="Self.FK_LigneCommande_Article1">
+            <End Role="Article" EntitySet="Article" />
+            <End Role="LigneCommande" EntitySet="LigneCommande" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LigneCommande_Commande" Association="Self.FK_LigneCommande_Commande">
+            <End Role="Commande" EntitySet="Commande" />
+            <End Role="LigneCommande" EntitySet="LigneCommande" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Livraison_Commande" Association="Self.FK_Livraison_Commande">
+            <End Role="Commande" EntitySet="Commande" />
+            <End Role="Livraison" EntitySet="Livraison" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Livraison_Livraison" Association="Self.FK_Livraison_Livraison">
+            <End Role="Livraison" EntitySet="Livraison" />
+            <End Role="Livraison1" EntitySet="Livraison" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Livraison_ModeLivraison" Association="Self.FK_Livraison_ModeLivraison">
+            <End Role="ModeLivraison" EntitySet="ModeLivraison" />
+            <End Role="Livraison" EntitySet="Livraison" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="iBoutiqureDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -245,6 +442,8 @@
           <NavigationProperty Name="Categorie" Relationship="Self.FK_Article_Categorie" FromRole="Article" ToRole="Categorie" />
           <NavigationProperty Name="Marque" Relationship="Self.FK_Article_Marque" FromRole="Article" ToRole="Marque" />
           <NavigationProperty Name="Type" Relationship="Self.FK_Article_Type" FromRole="Article" ToRole="Type" />
+          <NavigationProperty Name="LigneCommandes" Relationship="Self.FK_LigneCommande_Article" FromRole="Article" ToRole="LigneCommande" />
+          <NavigationProperty Name="LigneCommandes1" Relationship="Self.FK_LigneCommande_Article1" FromRole="Article" ToRole="LigneCommande" />
         </EntityType>
         <EntityType Name="Categorie">
           <Key>
@@ -260,10 +459,64 @@
             <PropertyRef Name="idCommande" />
           </Key>
           <Property Name="idCommande" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="datecommande" Type="DateTime" Precision="0" />
+          <Property Name="totalcommande" Type="Int32" />
+          <Property Name="descriptionCmd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idUser" Type="Int32" />
+          <Property Name="id_etat_commande" Type="Int32" />
+          <NavigationProperty Name="Commande1" Relationship="Self.FK_Commande_Commande" FromRole="Commande" ToRole="Commande1" />
+          <NavigationProperty Name="Commande2" Relationship="Self.FK_Commande_Commande" FromRole="Commande1" ToRole="Commande" />
+          <NavigationProperty Name="Commande11" Relationship="Self.FK_Commande_Commande1" FromRole="Commande" ToRole="Commande1" />
+          <NavigationProperty Name="Commande3" Relationship="Self.FK_Commande_Commande1" FromRole="Commande1" ToRole="Commande" />
+          <NavigationProperty Name="Factures" Relationship="Self.FK_Facture_Commande" FromRole="Commande" ToRole="Facture" />
+          <NavigationProperty Name="LigneCommandes" Relationship="Self.FK_LigneCommande_Commande" FromRole="Commande" ToRole="LigneCommande" />
+          <NavigationProperty Name="Livraisons" Relationship="Self.FK_Livraison_Commande" FromRole="Commande" ToRole="Livraison" />
+        </EntityType>
+        <EntityType Name="EtatCommande">
+          <Key>
+            <PropertyRef Name="id_etat_commande" />
+          </Key>
+          <Property Name="id_etat_commande" Type="Int32" Nullable="false" />
+          <Property Name="libelle_etat_cmd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Facture">
+          <Key>
+            <PropertyRef Name="idfacture" />
+          </Key>
+          <Property Name="idfacture" Type="Int32" Nullable="false" />
+          <Property Name="idCommande" Type="Int32" />
+          <Property Name="dateFacture" Type="DateTime" Precision="0" />
+          <Property Name="TVA" Type="Double" />
+          <Property Name="remise" Type="Int32" />
+          <Property Name="total" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="totalttc" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Commande" Relationship="Self.FK_Facture_Commande" FromRole="Facture" ToRole="Commande" />
+        </EntityType>
+        <EntityType Name="LigneCommande">
+          <Key>
+            <PropertyRef Name="idlignecommande" />
+          </Key>
+          <Property Name="idarticle" Type="Int32" />
+          <Property Name="idcommande" Type="Int32" />
+          <Property Name="qtecmde" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="idlignecommande" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Article" Relationship="Self.FK_LigneCommande_Article" FromRole="LigneCommande" ToRole="Article" />
+          <NavigationProperty Name="Article1" Relationship="Self.FK_LigneCommande_Article1" FromRole="LigneCommande" ToRole="Article" />
+          <NavigationProperty Name="Commande" Relationship="Self.FK_LigneCommande_Commande" FromRole="LigneCommande" ToRole="Commande" />
+        </EntityType>
+        <EntityType Name="Livraison">
+          <Key>
+            <PropertyRef Name="idlivraison" />
+          </Key>
+          <Property Name="idlivraison" Type="Int32" Nullable="false" />
           <Property Name="date" Type="DateTime" Precision="0" />
-          <Property Name="adresseLivraison" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="detailLivraison" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="dateLivraison" Type="DateTime" Precision="0" />
+          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="idmodelivraison" Type="Int32" />
+          <Property Name="idCommande" Type="Int32" />
+          <NavigationProperty Name="Commande" Relationship="Self.FK_Livraison_Commande" FromRole="Livraison" ToRole="Commande" />
+          <NavigationProperty Name="Livraison1" Relationship="Self.FK_Livraison_Livraison" FromRole="Livraison" ToRole="Livraison1" />
+          <NavigationProperty Name="Livraison2" Relationship="Self.FK_Livraison_Livraison" FromRole="Livraison1" ToRole="Livraison" />
+          <NavigationProperty Name="ModeLivraison" Relationship="Self.FK_Livraison_ModeLivraison" FromRole="Livraison" ToRole="ModeLivraison" />
         </EntityType>
         <EntityType Name="Marque">
           <Key>
@@ -273,6 +526,15 @@
           <Property Name="libelleMarque" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="nbfoisMarque" Type="Int32" />
           <NavigationProperty Name="Articles" Relationship="Self.FK_Article_Marque" FromRole="Marque" ToRole="Article" />
+        </EntityType>
+        <EntityType Name="ModeLivraison">
+          <Key>
+            <PropertyRef Name="idmodelivraison" />
+          </Key>
+          <Property Name="idmodelivraison" Type="Int32" Nullable="false" />
+          <Property Name="libelleliv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="modelivraison1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Livraisons" Relationship="Self.FK_Livraison_ModeLivraison" FromRole="ModeLivraison" ToRole="Livraison" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -358,12 +620,125 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="iBoutiqureDBEntities2" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_LigneCommande_Article">
+          <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+          <End Role="LigneCommande" Type="Self.LigneCommande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="idArticle" />
+            </Principal>
+            <Dependent Role="LigneCommande">
+              <PropertyRef Name="idarticle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LigneCommande_Article1">
+          <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+          <End Role="LigneCommande" Type="Self.LigneCommande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="idArticle" />
+            </Principal>
+            <Dependent Role="LigneCommande">
+              <PropertyRef Name="idarticle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Commande_Commande">
+          <End Role="Commande" Type="Self.Commande" Multiplicity="0..1" />
+          <End Role="Commande1" Type="Self.Commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commande">
+              <PropertyRef Name="idCommande" />
+            </Principal>
+            <Dependent Role="Commande1">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Commande_Commande1">
+          <End Role="Commande" Type="Self.Commande" Multiplicity="0..1" />
+          <End Role="Commande1" Type="Self.Commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commande">
+              <PropertyRef Name="idCommande" />
+            </Principal>
+            <Dependent Role="Commande1">
+              <PropertyRef Name="id_etat_commande" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facture_Commande">
+          <End Role="Commande" Type="Self.Commande" Multiplicity="0..1" />
+          <End Role="Facture" Type="Self.Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commande">
+              <PropertyRef Name="idCommande" />
+            </Principal>
+            <Dependent Role="Facture">
+              <PropertyRef Name="idCommande" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LigneCommande_Commande">
+          <End Role="Commande" Type="Self.Commande" Multiplicity="0..1" />
+          <End Role="LigneCommande" Type="Self.LigneCommande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commande">
+              <PropertyRef Name="idCommande" />
+            </Principal>
+            <Dependent Role="LigneCommande">
+              <PropertyRef Name="idcommande" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Livraison_Commande">
+          <End Role="Commande" Type="Self.Commande" Multiplicity="0..1" />
+          <End Role="Livraison" Type="Self.Livraison" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commande">
+              <PropertyRef Name="idCommande" />
+            </Principal>
+            <Dependent Role="Livraison">
+              <PropertyRef Name="idCommande" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Livraison_Livraison">
+          <End Role="Livraison" Type="Self.Livraison" Multiplicity="1" />
+          <End Role="Livraison1" Type="Self.Livraison" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Livraison">
+              <PropertyRef Name="idlivraison" />
+            </Principal>
+            <Dependent Role="Livraison1">
+              <PropertyRef Name="idlivraison" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Livraison_ModeLivraison">
+          <End Role="ModeLivraison" Type="Self.ModeLivraison" Multiplicity="0..1" />
+          <End Role="Livraison" Type="Self.Livraison" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModeLivraison">
+              <PropertyRef Name="idmodelivraison" />
+            </Principal>
+            <Dependent Role="Livraison">
+              <PropertyRef Name="idmodelivraison" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="iBoutiqureDBEntities4" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="Articles" EntityType="Self.Article" />
           <EntitySet Name="Categories" EntityType="Self.Categorie" />
           <EntitySet Name="Commandes" EntityType="Self.Commande" />
+          <EntitySet Name="EtatCommandes" EntityType="Self.EtatCommande" />
+          <EntitySet Name="Factures" EntityType="Self.Facture" />
+          <EntitySet Name="LigneCommandes" EntityType="Self.LigneCommande" />
+          <EntitySet Name="Livraisons" EntityType="Self.Livraison" />
           <EntitySet Name="Marques" EntityType="Self.Marque" />
+          <EntitySet Name="ModeLivraisons" EntityType="Self.ModeLivraison" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Types" EntityType="Self.Type" />
           <EntitySet Name="Users" EntityType="Self.User" />
@@ -383,8 +758,44 @@
             <End Role="Type" EntitySet="Types" />
             <End Role="Article" EntitySet="Articles" />
           </AssociationSet>
+          <AssociationSet Name="FK_LigneCommande_Article" Association="Self.FK_LigneCommande_Article">
+            <End Role="Article" EntitySet="Articles" />
+            <End Role="LigneCommande" EntitySet="LigneCommandes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LigneCommande_Article1" Association="Self.FK_LigneCommande_Article1">
+            <End Role="Article" EntitySet="Articles" />
+            <End Role="LigneCommande" EntitySet="LigneCommandes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Commande_Commande" Association="Self.FK_Commande_Commande">
+            <End Role="Commande" EntitySet="Commandes" />
+            <End Role="Commande1" EntitySet="Commandes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Commande_Commande1" Association="Self.FK_Commande_Commande1">
+            <End Role="Commande" EntitySet="Commandes" />
+            <End Role="Commande1" EntitySet="Commandes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facture_Commande" Association="Self.FK_Facture_Commande">
+            <End Role="Commande" EntitySet="Commandes" />
+            <End Role="Facture" EntitySet="Factures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LigneCommande_Commande" Association="Self.FK_LigneCommande_Commande">
+            <End Role="Commande" EntitySet="Commandes" />
+            <End Role="LigneCommande" EntitySet="LigneCommandes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Livraison_Commande" Association="Self.FK_Livraison_Commande">
+            <End Role="Commande" EntitySet="Commandes" />
+            <End Role="Livraison" EntitySet="Livraisons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Livraison_Livraison" Association="Self.FK_Livraison_Livraison">
+            <End Role="Livraison" EntitySet="Livraisons" />
+            <End Role="Livraison1" EntitySet="Livraisons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Livraison_ModeLivraison" Association="Self.FK_Livraison_ModeLivraison">
+            <End Role="ModeLivraison" EntitySet="ModeLivraisons" />
+            <End Role="Livraison" EntitySet="Livraisons" />
+          </AssociationSet>
           <FunctionImport Name="deleteCmd">
-          <Parameter Name="idCommande" Mode="In" Type="Int32" />
+            <Parameter Name="idCommande" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="displaycmd" ReturnType="Collection(iBoutiqureDBModel.displaycmd_Result)" />
           <FunctionImport Name="sp_alterdiagram">
@@ -417,23 +828,15 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <FunctionImport Name="fundisplay" EntitySet="Commandes" ReturnType="Collection(iBoutiqureDBModel.Commande)" />
-          <FunctionImport Name="deletecmd1" EntitySet="Commandes" ReturnType="Collection(iBoutiqureDBModel.Commande)">
-          <Parameter Name="idCommande" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="supprimer" EntitySet="Commandes" ReturnType="Collection(iBoutiqureDBModel.Commande)">
-          <Parameter Name="idCommande" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="supp" EntitySet="Commandes" ReturnType="Collection(iBoutiqureDBModel.Commande)">
-            <Parameter Name="idCommande" Mode="In" Type="Int32" />
-          </FunctionImport>
+          <FunctionImport Name="fun_display1" EntitySet="Commandes" ReturnType="Collection(iBoutiqureDBModel.Commande)" />
         </EntityContainer>
         <ComplexType Name="displaycmd_Result">
           <Property Type="Int32" Name="idCommande" Nullable="false" />
-          <Property Type="DateTime" Name="date" Nullable="true" />
-          <Property Type="String" Name="adresseLivraison" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="detailLivraison" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="dateLivraison" Nullable="true" />
+          <Property Type="DateTime" Name="datecommande" Nullable="true" />
+          <Property Type="Int32" Name="totalcommande" Nullable="true" />
+          <Property Type="String" Name="descriptionCmd" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="idUser" Nullable="true" />
+          <Property Type="Int32" Name="id_etat_commande" Nullable="true" />
         </ComplexType>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -451,7 +854,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="iBoutiqureDBModelStoreContainer" CdmEntityContainer="iBoutiqureDBEntities2">
+        <EntityContainerMapping StorageEntityContainer="iBoutiqureDBModelStoreContainer" CdmEntityContainer="iBoutiqureDBEntities4">
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="iBoutiqureDBModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
@@ -498,10 +901,53 @@
             <EntityTypeMapping TypeName="iBoutiqureDBModel.Commande">
               <MappingFragment StoreEntitySet="Commande">
                 <ScalarProperty Name="idCommande" ColumnName="idCommande" />
+                <ScalarProperty Name="datecommande" ColumnName="datecommande" />
+                <ScalarProperty Name="totalcommande" ColumnName="totalcommande" />
+                <ScalarProperty Name="descriptionCmd" ColumnName="descriptionCmd" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="id_etat_commande" ColumnName="id_etat_commande" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EtatCommandes">
+            <EntityTypeMapping TypeName="iBoutiqureDBModel.EtatCommande">
+              <MappingFragment StoreEntitySet="EtatCommande">
+                <ScalarProperty Name="id_etat_commande" ColumnName="id_etat_commande" />
+                <ScalarProperty Name="libelle_etat_cmd" ColumnName="libelle_etat_cmd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Factures">
+            <EntityTypeMapping TypeName="iBoutiqureDBModel.Facture">
+              <MappingFragment StoreEntitySet="Facture">
+                <ScalarProperty Name="idfacture" ColumnName="idfacture" />
+                <ScalarProperty Name="idCommande" ColumnName="idCommande" />
+                <ScalarProperty Name="dateFacture" ColumnName="dateFacture" />
+                <ScalarProperty Name="TVA" ColumnName="TVA" />
+                <ScalarProperty Name="remise" ColumnName="remise" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="totalttc" ColumnName="totalttc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LigneCommandes">
+            <EntityTypeMapping TypeName="iBoutiqureDBModel.LigneCommande">
+              <MappingFragment StoreEntitySet="LigneCommande">
+                <ScalarProperty Name="idarticle" ColumnName="idarticle" />
+                <ScalarProperty Name="idcommande" ColumnName="idcommande" />
+                <ScalarProperty Name="qtecmde" ColumnName="qtecmde" />
+                <ScalarProperty Name="idlignecommande" ColumnName="idlignecommande" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Livraisons">
+            <EntityTypeMapping TypeName="iBoutiqureDBModel.Livraison">
+              <MappingFragment StoreEntitySet="Livraison">
+                <ScalarProperty Name="idlivraison" ColumnName="idlivraison" />
                 <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="adresseLivraison" ColumnName="adresseLivraison" />
-                <ScalarProperty Name="detailLivraison" ColumnName="detailLivraison" />
-                <ScalarProperty Name="dateLivraison" ColumnName="dateLivraison" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="idmodelivraison" ColumnName="idmodelivraison" />
+                <ScalarProperty Name="idCommande" ColumnName="idCommande" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -511,6 +957,15 @@
                 <ScalarProperty Name="idMarque" ColumnName="idMarque" />
                 <ScalarProperty Name="libelleMarque" ColumnName="libelleMarque" />
                 <ScalarProperty Name="nbfoisMarque" ColumnName="nbfoisMarque" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModeLivraisons">
+            <EntityTypeMapping TypeName="iBoutiqureDBModel.ModeLivraison">
+              <MappingFragment StoreEntitySet="ModeLivraison">
+                <ScalarProperty Name="idmodelivraison" ColumnName="idmodelivraison" />
+                <ScalarProperty Name="libelleliv" ColumnName="libelleliv" />
+                <ScalarProperty Name="modelivraison1" ColumnName="modelivraison" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -557,10 +1012,11 @@
             <ResultMapping>
               <ComplexTypeMapping TypeName="iBoutiqureDBModel.displaycmd_Result">
                 <ScalarProperty Name="idCommande" ColumnName="idCommande" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="adresseLivraison" ColumnName="adresseLivraison" />
-                <ScalarProperty Name="detailLivraison" ColumnName="detailLivraison" />
-                <ScalarProperty Name="dateLivraison" ColumnName="dateLivraison" />
+                <ScalarProperty Name="datecommande" ColumnName="datecommande" />
+                <ScalarProperty Name="totalcommande" ColumnName="totalcommande" />
+                <ScalarProperty Name="descriptionCmd" ColumnName="descriptionCmd" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="id_etat_commande" ColumnName="id_etat_commande" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -588,10 +1044,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="iBoutiqureDBModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="iBoutiqureDBModel.Store.sp_upgraddiagrams" />
-          <FunctionImportMapping FunctionImportName="fundisplay" FunctionName="iBoutiqureDBModel.Store.displaycmd" />
-          <FunctionImportMapping FunctionImportName="deletecmd1" FunctionName="iBoutiqureDBModel.Store.deleteCmd" />
-          <FunctionImportMapping FunctionImportName="supprimer" FunctionName="iBoutiqureDBModel.Store.deleteCmd" />
-          <FunctionImportMapping FunctionImportName="supp" FunctionName="iBoutiqureDBModel.Store.deleteCmd" />
+          <FunctionImportMapping FunctionImportName="fun_display1" FunctionName="iBoutiqureDBModel.Store.displaycmd" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

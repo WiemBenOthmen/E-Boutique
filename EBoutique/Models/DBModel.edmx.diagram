@@ -4,19 +4,33 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1a6895b983eb452cb96bed1ce575695c" Name="Diagram1">
-        <EntityTypeShape EntityType="iBoutiqureDBModel.Admin" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="iBoutiqureDBModel.Article" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="iBoutiqureDBModel.Categorie" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="iBoutiqureDBModel.Commande" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="iBoutiqureDBModel.Marque" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="iBoutiqureDBModel.sysdiagram" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="iBoutiqureDBModel.Type" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="iBoutiqureDBModel.User" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+      <Diagram DiagramId="50cf472d3fff49e98b1ed3fb435a7ceb" Name="Diagram1">
+        <EntityTypeShape EntityType="iBoutiqureDBModel.Admin" Width="1.5" PointX="1.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="iBoutiqureDBModel.Article" Width="1.5" PointX="3.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="iBoutiqureDBModel.Categorie" Width="1.5" PointX="1.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="iBoutiqureDBModel.Commande" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="iBoutiqureDBModel.EtatCommande" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="iBoutiqureDBModel.Facture" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="iBoutiqureDBModel.LigneCommande" Width="1.5" PointX="6" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="iBoutiqureDBModel.Livraison" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="iBoutiqureDBModel.Marque" Width="1.5" PointX="1.5" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="iBoutiqureDBModel.ModeLivraison" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="iBoutiqureDBModel.sysdiagram" Width="1.5" PointX="7.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="iBoutiqureDBModel.Type" Width="1.5" PointX="1.5" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="iBoutiqureDBModel.User" Width="1.5" PointX="8.75" PointY="4" IsExpanded="true" />
         <AssociationConnector Association="iBoutiqureDBModel.FK_Article_Admin" ManuallyRouted="false" />
         <AssociationConnector Association="iBoutiqureDBModel.FK_Article_Categorie" ManuallyRouted="false" />
         <AssociationConnector Association="iBoutiqureDBModel.FK_Article_Marque" ManuallyRouted="false" />
         <AssociationConnector Association="iBoutiqureDBModel.FK_Article_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="iBoutiqureDBModel.FK_LigneCommande_Article" ManuallyRouted="false" />
+        <AssociationConnector Association="iBoutiqureDBModel.FK_LigneCommande_Article1" ManuallyRouted="false" />
+        <AssociationConnector Association="iBoutiqureDBModel.FK_Commande_Commande" ManuallyRouted="false" />
+        <AssociationConnector Association="iBoutiqureDBModel.FK_Commande_Commande1" ManuallyRouted="false" />
+        <AssociationConnector Association="iBoutiqureDBModel.FK_Facture_Commande" ManuallyRouted="false" />
+        <AssociationConnector Association="iBoutiqureDBModel.FK_LigneCommande_Commande" ManuallyRouted="false" />
+        <AssociationConnector Association="iBoutiqureDBModel.FK_Livraison_Commande" ManuallyRouted="false" />
+        <AssociationConnector Association="iBoutiqureDBModel.FK_Livraison_Livraison" ManuallyRouted="false" />
+        <AssociationConnector Association="iBoutiqureDBModel.FK_Livraison_ModeLivraison" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
