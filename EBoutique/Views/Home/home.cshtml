@@ -703,7 +703,8 @@
         div1.appendChild(img);
         document.getElementById('discussion').appendChild(div1);
         var div = document.createElement("div");
-        div.setAttribute("class", "direct-chat-text");
+                    div.setAttribute("class", "direct-chat-text");
+                 //   div.style.backgroundColor = rgb(254, 76, 80);
         var p = document.createElement("p");
                     p.innerText = this.responseText;
                     p.style.color = "white";
@@ -711,7 +712,7 @@
                     div.style.background = "#f39c12";
         document.getElementById('discussion').appendChild(div);
 
-
+                    document.getElementById('msg').value = '';
         //document.getElementById('discussion').innerHTML += this.responseText;
 
     }

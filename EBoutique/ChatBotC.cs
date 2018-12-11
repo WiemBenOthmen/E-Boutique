@@ -16,7 +16,7 @@ namespace EBoutique
             //Connexion avec bd
             ConnectionavecBase conB = new ConnectionavecBase();
             ob.MainUser.Context.SharedData.Add(conB);
-            ob.CreateRecognizer("Categorie", new[] { "T-Shirt", "Short", "Survêtement", "Gilet", "Jacket", "Veste", "Tops", "Robes", "Jupes", "Jeans", "Pantalons" });
+            ob.CreateRecognizer("Categorie", new[] { "T-Shirt", "Short", "Survêtement", "Gilet", "Jacket", "Veste", "Tops", "Robes", "Jupes", "Jeans", "Pantalons","Accessoires","Chaussures"});
             ob.Trainer.StartTraining();
         }
         public String reponseQuestion(String req)
