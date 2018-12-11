@@ -49,9 +49,6 @@ namespace EBoutique.Controllers
         public ActionResult Home()
         {
             return View();
-        }public ActionResult chatbot()
-        {
-            return View();
         }
         public ActionResult Panier()
         {
