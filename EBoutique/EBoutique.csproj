@@ -3263,6 +3263,7 @@
     <Content Include="Views\Home\Commande.cshtml" />
     <Content Include="Views\Home\Delete.cshtml" />
     <Content Include="Views\Home\chatbot.cshtml" />
+    <Content Include="Views\Home\detailsArticle.cshtml" />
     <None Include="Views\Home\Home.cshtml" />
     <None Include="Views\Home\Contact.cshtml" />
     <None Include="Views\Home\Categories.cshtml" />

@@ -1,0 +1,122 @@
+﻿@model EBoutique.Models.Article
+
+@{
+    ViewBag.Title = "detailsArticle";
+}
+
+<h2>detailsArticle</h2>
+
+<div>
+    <h4>Article</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.refArticle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.refArticle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.libelleArticle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.libelleArticle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prix)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prix)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.disponibilite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.disponibilite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nbpieces)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nbpieces)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.couleur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.couleur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.taille)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.taille)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cheminImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cheminImage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Admin.login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Admin.login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Categorie.libelleCatgorie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Categorie.libelleCatgorie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Marque.libelleMarque)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Marque.libelleMarque)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type.libelleType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type.libelleType)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idArticle }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

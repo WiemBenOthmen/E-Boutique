@@ -1,6 +1,4 @@
-﻿
-
-.box {
+﻿.box {
     position: relative;
     border-radius: 3px;
     background: #ffffff;
@@ -135,7 +133,7 @@
             .box.box-solid.box-warning > .box-header {
                 color: #fff;
                 background: #fe4c50;
-                background-color: #ffe4c50;
+                background-color: #fe4c50;
             }
 
                 .box.box-solid.box-warning > .box-header a, .box.box-solid.box-warning > .box-header .btn {
