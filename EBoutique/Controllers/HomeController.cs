@@ -335,24 +335,19 @@ namespace EBoutique.Controllers
                 }
             }
         }
-
+       
         [HttpPost]
-        [ActionName("Delete")]
-        public ActionResult DeleteUser(int id)
+        [ActionName("detail")]
+        public ActionResult detailsArticle(int id)
         {
-            bool status = false;
+           // bool status = false;
             using (iBoutiqureDBEntities4 dc = new iBoutiqureDBEntities4())
             {
-                var v = dc.Users.Where(a => a.idUser == id).FirstOrDefault();
-                if (v != null)
-                {
-                    dc.Users.Remove(v);
-                    dc.SaveChanges();
-                    status = true;
-                }
+                var v = dc.Articles.Where(a => a.idArticle == id).FirstOrDefault();
+               
             }
 
-            return new JsonResult { Data = new { status = status } };
+            return View();
         }
 
         //fin partie utilisateur
