@@ -383,8 +383,8 @@ namespace EBoutique.Controllers
                     status = true;
                 }
             }
-
-            return new JsonResult { Data = new { status = status } };
+            return RedirectToAction("ListeUsers", "home/ListeUsers");
+            // return new JsonResult { Data = new { status = status } };
         }
 
         //fin partie utilisateur
