@@ -13,7 +13,7 @@ namespace EBoutique.Controllers
 {
     public class HomeController : Controller
     {
-        iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2();
+        iBoutiqureDBEntities4 dc = new iBoutiqureDBEntities4();
         private static DbSet<Marque> lm;
 
         // GET: Home
@@ -49,6 +49,9 @@ namespace EBoutique.Controllers
         public ActionResult Home()
         {
             return View();
+        }public ActionResult chatbot()
+        {
+            return View();
         }
         public ActionResult Panier()
         {
@@ -68,7 +71,7 @@ namespace EBoutique.Controllers
         }
         public JsonResult GetArticles()
         {
-            iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2();
+            iBoutiqureDBEntities4 dc = new iBoutiqureDBEntities4();
             List<ArticleViewModel> articles = dc.Articles.Select(x => new ArticleViewModel
             {
                 idArticle = x.idArticle,
@@ -90,7 +93,7 @@ namespace EBoutique.Controllers
         }
         public static List<SelectListItem> GetDropDown()
         {
-            iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2();
+            iBoutiqureDBEntities4 dc = new iBoutiqureDBEntities4();
             List<SelectListItem> ls = new List<SelectListItem>();
             lm =dc.Marques;
             foreach (var temp in lm)
@@ -108,17 +111,54 @@ namespace EBoutique.Controllers
         {
             return View();
         }
+        public ActionResult RegisterAdmin()
+        {
+            return View();
+        }
+        [HttpPost]
+
+        public ActionResult RegisterAdmin(Admin admin)
+        {
+            iBoutiqureDBEntities4 db = new iBoutiqureDBEntities4();
+            //var userloggedIn = db.Users.SingleOrDefault(x => x.login == admin.login && x.mdp == admin.mdp);
+            //if(userloggedIn !=null)
+            //{
+            //    ViewBag.massage = "Vous etes connecté";
+            //    ViewBag.triedOnce = "yes";
+            return RedirectToAction("index", "home/index");
+
+            //else
+            //{
+            //    ViewBag.triedOnce = "yes";
+            //    return View();
+            //}
+
+        }
+        public ActionResult LoginAdmin()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult LoginAdmin(Admin admin)
+        {
+            iBoutiqureDBEntities4 db = new iBoutiqureDBEntities4();
+            db.Admins.Add(admin);
+            db.SaveChanges();
+            ViewBag.message = "connexion avec succes";
+            return View();
+        }
+
 
         public ActionResult Commande()
         {
-            iBoutiqureDBEntities2 db = new iBoutiqureDBEntities2();
-            return View(db.fundisplay());
+            iBoutiqureDBEntities4 db = new iBoutiqureDBEntities4();
+            return View(db.fun_display1());
         }
 
         [HttpPost]
         public ActionResult Deletem(int id)
         {
-            using (iBoutiqureDBEntities2 db = new iBoutiqureDBEntities2())
+            using (iBoutiqureDBEntities4 db = new iBoutiqureDBEntities4())
             {
 
 
@@ -222,7 +262,7 @@ namespace EBoutique.Controllers
         //debut partie utilisateur
         public JsonResult GetUsers()
         {
-            using (iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2())
+            using (iBoutiqureDBEntities4 dc = new iBoutiqureDBEntities4())
             {
                 var users = dc.Users.OrderBy(a => a.nom).ToList();
                 return Json(new { data = users }, JsonRequestBehavior.AllowGet);
@@ -233,7 +273,7 @@ namespace EBoutique.Controllers
         [HttpGet]
         public ActionResult Save(int id)
         {
-            using (iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2())
+            using (iBoutiqureDBEntities4 dc = new iBoutiqureDBEntities4())
             {
                 var u = dc.Users.Where(a => a.idUser == id).FirstOrDefault();
                 return View(u);
@@ -247,7 +287,7 @@ namespace EBoutique.Controllers
             bool status = false;
             if (ModelState.IsValid)
             {
-                using (iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2())
+                using (iBoutiqureDBEntities4 dc = new iBoutiqureDBEntities4())
                 {
                     if (us.idUser > 0)
                     {
@@ -282,7 +322,7 @@ namespace EBoutique.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            using (iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2())
+            using (iBoutiqureDBEntities4 dc = new iBoutiqureDBEntities4())
             {
                 var v = dc.Users.Where(a => a.idUser == id).FirstOrDefault();
                 if (v != null)
@@ -301,7 +341,7 @@ namespace EBoutique.Controllers
         public ActionResult DeleteUser(int id)
         {
             bool status = false;
-            using (iBoutiqureDBEntities2 dc = new iBoutiqureDBEntities2())
+            using (iBoutiqureDBEntities4 dc = new iBoutiqureDBEntities4())
             {
                 var v = dc.Users.Where(a => a.idUser == id).FirstOrDefault();
                 if (v != null)
@@ -316,7 +356,13 @@ namespace EBoutique.Controllers
         }
 
         //fin partie utilisateur
-
+        public ActionResult ChatBot(String attr)
+        {
+            ChatBotC bot = new ChatBotC();
+          String res= bot.reponseQuestion(attr);
+            res = "<p>" + res + " </p><br>";
+            return Content(res, "text/html");
+        }
 
     }
 }
