@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using System.ComponentModel;
 namespace EBoutique.Models
 {
     public class ArticleViewModel
@@ -16,6 +16,7 @@ namespace EBoutique.Models
         public Nullable<int> nbpieces { get; set; }
         public string couleur { get; set; }
         public string taille { get; set; }
+       
         public string cheminImage { get; set; }
         public Nullable<int> idCategorie { get; set; }
         public Nullable<int> idType { get; set; }
@@ -24,6 +25,8 @@ namespace EBoutique.Models
         public string libelleCatgorie { get; set; }
         public string libelleType { get; set; }
         public string libelleMarque { get; set; }
+     
+       
 
 
 

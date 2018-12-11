@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="~/Content/assetss/plugins/OwlCarousel2-2.2.1/animate.css">
     <link rel="stylesheet" type="text/css" href="~/Content/assetss/styles/main_styles.css">
     <link rel="stylesheet" type="text/css" href="~/Content/assetss/styles/responsive.css">
-    <link href="~/Content/assetss/styles/Chatbot.css" rel="stylesheet" />
+
 
 </head>
 
@@ -151,10 +151,25 @@
                                 </div>
                             </div>
                             <!-- /.box-header -->
-                            <div class="box-body">
+                            <div class="box-body" >
                                 <!-- Conversations are loaded here -->
-                                <div class="direct-chat-messages">
-                                    <div id="discussion" style="height: 300px; border: 1px solid gray;">
+                                <div class="direct-chat-messages" style="height: 300px; border: 1px solid gray;">
+                                    <div id="discussion" >
+
+                                        <!-- Message. Default to the left -->
+                                        <div class="direct-chat-msg">
+                                            <div class="direct-chat-info clearfix">
+                                                <span class="direct-chat-name pull-left">Alexander Pierce</span>
+                                                
+                                            </div>
+                                            <!-- /.direct-chat-info -->
+                                            <img class="direct-chat-img" src="https://bootdey.com/img/Content/user_1.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
+                                            <div class="direct-chat-text">
+                                                Is this template really for free? That's unbelievable!
+                                            </div>
+                                            <!-- /.direct-chat-text -->
+                                        </div>
+                                        <!-- /.direct-chat-msg -->
                                         <!-- Message to the right -->
                                         <div class="direct-chat-msg right">
                                             <div class="direct-chat-info clearfix">
@@ -688,17 +703,73 @@
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById('discussion').innerHTML += this.responseText;
 
-                }
-            };
-            var msg = document.getElementById('msg').value;
-            document.getElementById('discussion').innerHTML += "<p> You: " + msg + " </p> <br>";
-            var link = "@Url.Action("ChatBot", "Home", new { attr = "var" })";
-            link = link.replace('var', msg);
-            xmlhttp.open("POST", link, true);
-            xmlhttp.send();
-       }
+
+
+
+
+                    
+
+
+
+        var div1 = document.createElement("div");
+        div1.setAttribute("class", "direct-chat-msg ");
+        var div2 = document.createElement("div");
+                    div2.setAttribute("class", "direct-chat-info clearfix");
+                   
+        var sp = document.createElement("span");
+                    sp.setAttribute("class", "direct-chat-name pull-left");
+        sp.innerText = "Roya";
+        div2.appendChild(sp);
+        var img = document.createElement("img");
+        img.setAttribute("src", "https://bootdey.com/img/Content/user_2.jpg");
+        img.setAttribute("class", "direct-chat-img");
+        img.setAttribute("alt", "Message User Image");
+        div1.appendChild(div2);
+        div1.appendChild(img);
+        document.getElementById('discussion').appendChild(div1);
+        var div = document.createElement("div");
+        div.setAttribute("class", "direct-chat-text");
+        var p = document.createElement("p");
+                    p.innerText = this.responseText;
+                    p.style.color = "white";
+        div.appendChild(p);
+                    div.style.background = "#f39c12";
+        document.getElementById('discussion').appendChild(div);
+
+
+        //document.getElementById('discussion').innerHTML += this.responseText;
+
+    }
+};
+var msg = document.getElementById('msg').value;
+var div1 = document.createElement("div");
+div1.setAttribute("class", "direct-chat-msg");
+var div2 = document.createElement("div");
+div2.setAttribute("class", "direct-chat-info clearfix");
+var sp = document.createElement("span");
+sp.setAttribute("class", "direct-chat-name pull-left");
+sp.innerText = "You";
+div2.appendChild(sp);
+var img = document.createElement("img");
+img.setAttribute("src", "https://bootdey.com/img/Content/user_1.jpg");
+img.setAttribute("class", "direct-chat-img");
+img.setAttribute("alt", "Message User Image");
+div1.appendChild(div2);
+div1.appendChild(img);
+document.getElementById('discussion').appendChild(div1);
+var divv = document.createElement("div");
+divv.setAttribute("class", "direct-chat-text");
+var p = document.createElement("p");
+p.innerText = msg;
+divv.appendChild(p);
+ 
+document.getElementById('discussion').appendChild(divv);
+var link = "@Url.Action("ChatBot", "Home", new { attr = "var" })";
+link = link.replace('var', msg);
+xmlhttp.open("POST", link, true);
+xmlhttp.send();
+}
     </script>
 <script src="~/Content/assetss/js/jquery-3.2.1.min.js"></script>
 <script src="~/Content/assetss/styles/bootstrap4/popper.js"></script>

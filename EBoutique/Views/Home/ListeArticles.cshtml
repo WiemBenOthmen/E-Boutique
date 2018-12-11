@@ -434,34 +434,37 @@
                                 @Html.TextBoxFor(m => m.nbpieces, new { @id = "nbpieces", @class = "form-control", @placeholder = "Nombre de pièces" })
                             </div>
                             <div class="form-group">
-                                @Html.TextBoxFor(m=>m.couleur,new { @id = "couleur", @class = "form-control", @placeholder = "Couleur" })
+                                @Html.TextBoxFor(m => m.couleur, new { @id = "couleur", @class = "form-control", @placeholder = "Couleur" })
+                            </div>
+                            <div class="form-group">
+                           <input type="file" name="ImageFile" required/>
                             </div>
                             <div class="form-group">
 
                                 @*    <select name="taille">
-            <option>36</option>
-            <option>38</option>
-            <option>40</option>
-            <option>42</option>
-            <option>44</option>
-            <option>46</option>
+                <option>36</option>
+                <option>38</option>
+                <option>40</option>
+                <option>42</option>
+                <option>44</option>
+                <option>46</option>
 
-        </select>
+            </select>
                                 *@
                                 @Html.TextBoxFor(m => m.taille, new { @id = "taille", @class = "form-control", @placeholder = "Taille" })
 
                             </div>
                             <div class="form-group">
                                 @if (ViewBag.liste != null)
-                                {@Html.DropDownListFor(m=>m.idMarque, ViewBag.liste as SelectList, "--Selectionner une Marque--", new { @id = "DropDwn", @class = "form-control" })
+                                {@Html.DropDownListFor(m => m.idMarque, ViewBag.liste as SelectList, "--Selectionner une Marque--", new { @id = "DropDwn", @class = "form-control" })
                             }
                             </div>
                             <div class="form-group">
-                               
+
                                 @Html.DropDownListFor(m => m.idCategorie, ViewBag.liste1 as SelectList, "--Selectionner une Catégorie", new { @id = "DropDwn2", @class = "form-control" })
                             </div>
                             <div class="form-group">
-                              
+
                                 @Html.DropDownListFor(m => m.idType, ViewBag.liste2 as SelectList, "--Selectionner un Type", new { @id = "DropDwn3", @class = "form-control" })
                             </div>
                             <div class="form-group">
