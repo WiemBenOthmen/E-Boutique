@@ -72,7 +72,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="chart.html">
+                            <a href="ListeUsers">
                                 <i class="fas fa-chart-bar"></i>Liste des utilisateurs
                             </a>
                         </li>
@@ -82,7 +82,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="form.html">
+                            <a href="Comande">
                                 <i class="far fa-check-square"></i>Liste des Commandes
                             </a>
                         </li>
@@ -120,7 +120,7 @@
 
                         </li>
                         <li>
-                            <a href="chart.html">
+                            <a href="ListeUsers">
                                 <i class="fas fa-chart-bar"></i>Liste des utilisateurs
                             </a>
                         </li>
@@ -130,7 +130,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="form.html">
+                            <a href="Commande">
                                 <i class="far fa-check-square"></i>Liste des Commandes
                             </a>
                         </li>
@@ -554,25 +554,7 @@
             $('#MyModal').modal('show');
 
         }
-        $("#SaveArticleRecord").click(function () {
-
-            var data = $("#SubmitForm").serialize();
-            $.ajax({
-                type: "Post",
-                url: "/Home/SaveDataInDatabase",
-                data: data,
-                success: function (result) {
-                    alert("Success!..");
-                    window.location.href = "/Home/ListeArticles";
-                    $("#MyModal").modal("hide");
-
-                },
-                error: function (result) {
-                    alert("echec!..");
-                }
-            })
-        })
-       /* function EditArticletRecord(m) {
+         function EditArticletRecord(m) {
             $('#form')[0].reset();
             $("#ArticleId").val(m);
             $("#ModalTitle").html("Modifier l'Article");
@@ -602,7 +584,26 @@
 
                 }
             })
-        }*/
+        }
+        $("#SaveArticleRecord").click(function () {
+
+            var data = $("#SubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/Home/SaveDataInDatabase",
+                data: data,
+                success: function (result) {
+                    alert("Success!..");
+                    window.location.href = "/Home/ListeArticles";
+                    $("#MyModal").modal("hide");
+
+                },
+                error: function (result) {
+                    alert("echec!..");
+                }
+            })
+        })
+       
        /* $("#newId").on("click", function () {
             var data = $("#SubmitForm").serialize();
             $.ajax({
