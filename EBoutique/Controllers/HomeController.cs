@@ -66,6 +66,46 @@ namespace EBoutique.Controllers
         {
             return View();
         }
+        public ActionResult Single11()
+        {
+            return View();
+        }
+        public ActionResult Single12()
+        {
+            return View();
+        }
+        public ActionResult Single13()
+        {
+            return View();
+        }
+        public ActionResult Single14()
+        {
+            return View();
+        }
+        public ActionResult Single15()
+        {
+            return View();
+        }
+        public ActionResult Single16()
+        {
+            return View();
+        }
+        public ActionResult Single17()
+        {
+            return View();
+        }
+        public ActionResult Single18()
+        {
+            return View();
+        }
+        public ActionResult Single19()
+        {
+            return View();
+        }
+        public ActionResult Single20()
+        {
+            return View();
+        }
         public JsonResult GetArticles()
         {
             iBoutiqureDBEntities4 dc = new iBoutiqureDBEntities4();
