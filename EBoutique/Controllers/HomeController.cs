@@ -389,7 +389,7 @@ namespace EBoutique.Controllers
         {
             ChatBotC bot = new ChatBotC();
           String res= bot.reponseQuestion(attr);
-            res = "<p>" + res + " </p><br>";
+            
             return Content(res, "text/html");
         }
 
