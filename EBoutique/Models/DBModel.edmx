@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="iBoutiqureDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="iBoutiqureDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="idAdmin" />
@@ -300,6 +300,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="affichagepanier" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="deleteCmd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idCommande" Type="int" Mode="In" />
         </Function>
@@ -402,8 +403,7 @@
             <End Role="Livraison" EntitySet="Livraison" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="iBoutiqureDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -795,7 +795,7 @@
             <End Role="Livraison" EntitySet="Livraisons" />
           </AssociationSet>
           <FunctionImport Name="deleteCmd">
-            <Parameter Name="idCommande" Mode="In" Type="Int32" />
+          <Parameter Name="idCommande" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="displaycmd" ReturnType="Collection(iBoutiqureDBModel.displaycmd_Result)" />
           <FunctionImport Name="sp_alterdiagram">
@@ -829,6 +829,8 @@
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="fun_display1" EntitySet="Commandes" ReturnType="Collection(iBoutiqureDBModel.Commande)" />
+          <FunctionImport Name="affichagepanier" ReturnType="Collection(iBoutiqureDBModel.affichagepanier_Result)" />
+          <FunctionImport Name="fun_affichep" />
         </EntityContainer>
         <ComplexType Name="displaycmd_Result">
           <Property Type="Int32" Name="idCommande" Nullable="false" />
@@ -848,6 +850,13 @@
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="affichagepanier_Result">
+          <Property Type="String" Name="cheminImage" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="libelleArticle" Nullable="true" MaxLength="100" />
+          <Property Type="Double" Name="prix" Nullable="true" />
+          <Property Type="String" Name="descriptionCmd" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="qtecmde" Nullable="true" Precision="18" Scale="0" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1045,6 +1054,18 @@
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="iBoutiqureDBModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="iBoutiqureDBModel.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="fun_display1" FunctionName="iBoutiqureDBModel.Store.displaycmd" />
+          <FunctionImportMapping FunctionImportName="affichagepanier" FunctionName="iBoutiqureDBModel.Store.affichagepanier">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="iBoutiqureDBModel.affichagepanier_Result">
+                <ScalarProperty Name="cheminImage" ColumnName="cheminImage" />
+                <ScalarProperty Name="libelleArticle" ColumnName="libelleArticle" />
+                <ScalarProperty Name="prix" ColumnName="prix" />
+                <ScalarProperty Name="descriptionCmd" ColumnName="descriptionCmd" />
+                <ScalarProperty Name="qtecmde" ColumnName="qtecmde" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="fun_affichep" FunctionName="iBoutiqureDBModel.Store.affichagepanier" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
