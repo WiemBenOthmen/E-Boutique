@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using System.Data.Entity.Core.Objects;
-using System.IO;
 
 namespace EBoutique.Controllers
 {
@@ -51,10 +50,7 @@ namespace EBoutique.Controllers
         {
             return View();
         }
-        public ActionResult Panier()
-        {
-            return View();
-        }
+        
         public ActionResult Contact()
         {
             return View();
@@ -152,7 +148,42 @@ namespace EBoutique.Controllers
             iBoutiqureDBEntities4 db = new iBoutiqureDBEntities4();
             return View(db.fun_display1());
         }
+        //public ActionResult Panier()
+        //{
+        //    iBoutiqureDBEntities4 db = new iBoutiqureDBEntities4();
+        //    return View(db.fun_affichep());
 
+        //}
+        //public ActionResult Panier()
+        //{
+        //    return View();
+
+        //}
+        public ActionResult Panier()
+        {
+            iBoutiqureDBEntities4 db = new iBoutiqureDBEntities4();
+            List<LigneCommande> list = db.LigneCommandes.ToList();
+            LigneCommandeViewModel lcvm = new LigneCommandeViewModel();
+
+            List<LigneCommandeViewModel> licmd = list.Select(x => new LigneCommandeViewModel {
+
+                idlignecommande = x.idlignecommande,
+               // idcommande=x.idcommande,
+                qtecmde=x.qtecmde,
+                idarticle=x.idarticle,
+                libelleArticle=x.Article.libelleArticle,
+                cheminImage=x.Article.cheminImage,
+                prix=x.Article.prix,
+                idUser=(int)x.Commande.idUser,
+
+                //descriptionCmd=x.Commande.descriptionCmd
+
+                
+            
+
+            }).ToList();
+            return View(licmd.Where(x=>x.idUser==2));            
+        }
         [HttpPost]
         public ActionResult Deletem(int id)
         {
@@ -199,14 +230,6 @@ namespace EBoutique.Controllers
             var result = false;
             try
             {
-                /*string fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);
-                string extension = Path.GetExtension(model.ImageFile.FileName);
-                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                model.cheminImage = "~/Images/" + fileName;
-                fileName = Path.Combine(Server.MapPath("~/Images/"), fileName);
-                model.ImageFile.SaveAs(fileName);
-                ModelState.Clear();*/
-
                 if (model.idArticle > 0)
                 {
                     Article art = dc.Articles.SingleOrDefault(x => x.disponibilite == true && x.idArticle == model.idArticle);
@@ -220,7 +243,6 @@ namespace EBoutique.Controllers
                     art.idCategorie = model.idCategorie;
                     art.idType = model.idType;
                     art.idMarque = model.idMarque;
-                   // art.cheminImage = model.cheminImage;
                     dc.SaveChanges();
                     result = true;
                 }
@@ -238,7 +260,6 @@ namespace EBoutique.Controllers
                     art.idType = model.idType;
                     art.idMarque = model.idMarque;
                     art.disponibilite = false;
-                    
                     dc.Articles.Add(art);
                     dc.SaveChanges();
                     result = true;
@@ -368,8 +389,7 @@ namespace EBoutique.Controllers
         {
             ChatBotC bot = new ChatBotC();
           String res= bot.reponseQuestion(attr);
-            //res = "<p>" + res + " </p><br>";
-            
+            res = "<p>" + res + " </p><br>";
             return Content(res, "text/html");
         }
 

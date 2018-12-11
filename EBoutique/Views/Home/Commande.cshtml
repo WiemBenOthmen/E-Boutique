@@ -143,7 +143,7 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
+                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Recherche" />
                                 <button class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>
@@ -267,7 +267,7 @@
                                             <img src="~/Content/asset/images/icon/avatar-01.jpg" alt="John Doe" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">john doe</a>
+                                            <a class="js-acc-btn" href="#">Admin</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -359,7 +359,7 @@
                                                 <div class="table-data__tool-left">
                                                     <div class="rs-select2--light rs-select2--md">
                                                         <select class="js-select2" name="property">
-                                                            <option selected="selected">All Properties</option>
+                                                            <option selected="selected"> Proprietés</option>
                                                             <option value="">Option 1</option>
                                                             <option value="">Option 2</option>
                                                         </select>
@@ -367,14 +367,14 @@
                                                     </div>
                                                     <div class="rs-select2--dark rs-select2--sm">
                                                         <select class="js-select2" name="time">
-                                                            <option selected="selected">Today</option>
-                                                            <option value="">3 Days</option>
-                                                            <option value="">1 Week</option>
+                                                            <option selected="selected">Aujourd'hui</option>
+                                                            <option value="">3 Jours</option>
+                                                            <option value="">1 Semaine</option>
                                                         </select>
                                                         <div class="dropDownSelect2"></div>
                                                     </div>
                                                     <button class="au-btn-filter">
-                                                        <i class="zmdi zmdi-filter-list"></i>filters
+                                                        <i class="zmdi zmdi-filter-list"></i>filtres
                                                     </button>
                                                 </div>
                                                 @*<div class="table-data__tool-right">
@@ -395,12 +395,14 @@
                                                 <table class="table table-data2">
                                                     <thead>
                                                         <tr>
-                                                            
+
                                                             <th>idCommande</th>
                                                             <th>date</th>
-                                                            <th>adresseLivraison</th>
-                                                            <th>detailLivraison</th>
-                                                            <th>dateLivraison</th>
+                                                            <th>Total Commandes</th>
+                                                            <th>description</th>
+                                                            <th>EtatCommande Id</th>
+                                                            <th>User Id</th>
+
                                                             <th>Supprimer</th>
                                                         </tr>
                                                     </thead>
@@ -410,10 +412,13 @@
                                                             {
                                                             <tr>
                                                                 <td>@result.idCommande</td>
-                                                                <td>@result.date</td>
-                                                                <td>@result.adresseLivraison</td>
-                                                                <td>@result.detailLivraison</td>
-                                                                <td>@result.dateLivraison</td>
+                                                                <td>@result.datecommande</td>
+                                                                <td>@result.totalcommande</td>
+                                                                <td>@result.descriptionCmd</td>
+                                                                <td>@result.id_etat_commande</td>
+                                                                <td>@result.idUser</td>
+                                                        
+
 
                                                                 <td>
                                                                     <div class="table-data-feature">
@@ -443,14 +448,15 @@
 
                 });
             }
-        }</script>                                                                    <
+        }</script>                                                                    
 
 </div>
                                                                 </td>
 
 
 
-                                                            </tr>}
+                                                            </tr>
+                                                            }
 
 
 
