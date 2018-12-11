@@ -10,14 +10,11 @@
 namespace EBoutique.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class displaycmd_Result
+    public partial class EtatCommande
     {
-        public int idCommande { get; set; }
-        public Nullable<System.DateTime> datecommande { get; set; }
-        public Nullable<int> totalcommande { get; set; }
-        public string descriptionCmd { get; set; }
-        public Nullable<int> idUser { get; set; }
-        public Nullable<int> id_etat_commande { get; set; }
+        public int id_etat_commande { get; set; }
+        public string libelle_etat_cmd { get; set; }
     }
 }

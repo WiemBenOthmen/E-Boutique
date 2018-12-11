@@ -14,10 +14,34 @@ namespace EBoutique.Models
     
     public partial class Commande
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Commande()
+        {
+            this.Commande1 = new HashSet<Commande>();
+            this.Commande11 = new HashSet<Commande>();
+            this.Factures = new HashSet<Facture>();
+            this.LigneCommandes = new HashSet<LigneCommande>();
+            this.Livraisons = new HashSet<Livraison>();
+        }
+    
         public int idCommande { get; set; }
-        public Nullable<System.DateTime> date { get; set; }
-        public string adresseLivraison { get; set; }
-        public string detailLivraison { get; set; }
-        public Nullable<System.DateTime> dateLivraison { get; set; }
+        public Nullable<System.DateTime> datecommande { get; set; }
+        public Nullable<int> totalcommande { get; set; }
+        public string descriptionCmd { get; set; }
+        public Nullable<int> idUser { get; set; }
+        public Nullable<int> id_etat_commande { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Commande> Commande1 { get; set; }
+        public virtual Commande Commande2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Commande> Commande11 { get; set; }
+        public virtual Commande Commande3 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Facture> Factures { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LigneCommande> LigneCommandes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Livraison> Livraisons { get; set; }
     }
 }

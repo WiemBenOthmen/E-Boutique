@@ -15,10 +15,10 @@ namespace EBoutique.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class iBoutiqureDBEntities2 : DbContext
+    public partial class iBoutiqureDBEntities4 : DbContext
     {
-        public iBoutiqureDBEntities2()
-            : base("name=iBoutiqureDBEntities2")
+        public iBoutiqureDBEntities4()
+            : base("name=iBoutiqureDBEntities4")
         {
         }
     
@@ -31,7 +31,12 @@ namespace EBoutique.Models
         public virtual DbSet<Article> Articles { get; set; }
         public virtual DbSet<Categorie> Categories { get; set; }
         public virtual DbSet<Commande> Commandes { get; set; }
+        public virtual DbSet<EtatCommande> EtatCommandes { get; set; }
+        public virtual DbSet<Facture> Factures { get; set; }
+        public virtual DbSet<LigneCommande> LigneCommandes { get; set; }
+        public virtual DbSet<Livraison> Livraisons { get; set; }
         public virtual DbSet<Marque> Marques { get; set; }
+        public virtual DbSet<ModeLivraison> ModeLivraisons { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Type> Types { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -153,68 +158,14 @@ namespace EBoutique.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     
-        public virtual ObjectResult<Commande> fundisplay()
+        public virtual ObjectResult<Commande> fun_display1()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Commande>("fundisplay");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Commande>("fun_display1");
         }
     
-        public virtual ObjectResult<Commande> fundisplay(MergeOption mergeOption)
+        public virtual ObjectResult<Commande> fun_display1(MergeOption mergeOption)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Commande>("fundisplay", mergeOption);
-        }
-    
-        public virtual ObjectResult<Commande> deletecmd1(Nullable<int> idCommande)
-        {
-            var idCommandeParameter = idCommande.HasValue ?
-                new ObjectParameter("idCommande", idCommande) :
-                new ObjectParameter("idCommande", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Commande>("deletecmd1", idCommandeParameter);
-        }
-    
-        public virtual ObjectResult<Commande> deletecmd1(Nullable<int> idCommande, MergeOption mergeOption)
-        {
-            var idCommandeParameter = idCommande.HasValue ?
-                new ObjectParameter("idCommande", idCommande) :
-                new ObjectParameter("idCommande", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Commande>("deletecmd1", mergeOption, idCommandeParameter);
-        }
-    
-        public virtual ObjectResult<Commande> supprimer(Nullable<int> idCommande)
-        {
-            var idCommandeParameter = idCommande.HasValue ?
-                new ObjectParameter("idCommande", idCommande) :
-                new ObjectParameter("idCommande", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Commande>("supprimer", idCommandeParameter);
-        }
-    
-        public virtual ObjectResult<Commande> supprimer(Nullable<int> idCommande, MergeOption mergeOption)
-        {
-            var idCommandeParameter = idCommande.HasValue ?
-                new ObjectParameter("idCommande", idCommande) :
-                new ObjectParameter("idCommande", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Commande>("supprimer", mergeOption, idCommandeParameter);
-        }
-    
-        public virtual ObjectResult<Commande> supp(Nullable<int> idCommande)
-        {
-            var idCommandeParameter = idCommande.HasValue ?
-                new ObjectParameter("idCommande", idCommande) :
-                new ObjectParameter("idCommande", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Commande>("supp", idCommandeParameter);
-        }
-    
-        public virtual ObjectResult<Commande> supp(Nullable<int> idCommande, MergeOption mergeOption)
-        {
-            var idCommandeParameter = idCommande.HasValue ?
-                new ObjectParameter("idCommande", idCommande) :
-                new ObjectParameter("idCommande", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Commande>("supp", mergeOption, idCommandeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Commande>("fun_display1", mergeOption);
         }
     }
 }
