@@ -50,10 +50,7 @@ namespace EBoutique.Controllers
         {
             return View();
         }
-        public ActionResult Panier()
-        {
-            return View();
-        }
+        
         public ActionResult Contact()
         {
             return View();
@@ -151,7 +148,42 @@ namespace EBoutique.Controllers
             iBoutiqureDBEntities4 db = new iBoutiqureDBEntities4();
             return View(db.fun_display1());
         }
+        //public ActionResult Panier()
+        //{
+        //    iBoutiqureDBEntities4 db = new iBoutiqureDBEntities4();
+        //    return View(db.fun_affichep());
 
+        //}
+        //public ActionResult Panier()
+        //{
+        //    return View();
+
+        //}
+        public ActionResult Panier()
+        {
+            iBoutiqureDBEntities4 db = new iBoutiqureDBEntities4();
+            List<LigneCommande> list = db.LigneCommandes.ToList();
+            LigneCommandeViewModel lcvm = new LigneCommandeViewModel();
+
+            List<LigneCommandeViewModel> licmd = list.Select(x => new LigneCommandeViewModel {
+
+                idlignecommande = x.idlignecommande,
+               // idcommande=x.idcommande,
+                qtecmde=x.qtecmde,
+                idarticle=x.idarticle,
+                libelleArticle=x.Article.libelleArticle,
+                cheminImage=x.Article.cheminImage,
+                prix=x.Article.prix,
+                idUser=(int)x.Commande.idUser,
+
+                //descriptionCmd=x.Commande.descriptionCmd
+
+                
+            
+
+            }).ToList();
+            return View(licmd.Where(x=>x.idUser==2));            
+        }
         [HttpPost]
         public ActionResult Deletem(int id)
         {
