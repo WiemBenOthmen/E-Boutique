@@ -3377,6 +3377,16 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\single11.cshtml" />
+    <Content Include="Views\Home\single12.cshtml" />
+    <Content Include="Views\Home\single13.cshtml" />
+    <Content Include="Views\Home\single14.cshtml" />
+    <Content Include="Views\Home\single15.cshtml" />
+    <Content Include="Views\Home\single16.cshtml" />
+    <Content Include="Views\Home\single17.cshtml" />
+    <Content Include="Views\Home\single18.cshtml" />
+    <Content Include="Views\Home\single19.cshtml" />
+    <Content Include="Views\Home\single20.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
