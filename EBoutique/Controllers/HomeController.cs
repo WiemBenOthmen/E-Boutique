@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using System.Data.Entity.Core.Objects;
+using System.IO;
 
 namespace EBoutique.Controllers
 {
@@ -47,9 +48,6 @@ namespace EBoutique.Controllers
         
 
         public ActionResult Home()
-        {
-            return View();
-        }public ActionResult chatbot()
         {
             return View();
         }
@@ -201,6 +199,14 @@ namespace EBoutique.Controllers
             var result = false;
             try
             {
+                /*string fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);
+                string extension = Path.GetExtension(model.ImageFile.FileName);
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                model.cheminImage = "~/Images/" + fileName;
+                fileName = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                model.ImageFile.SaveAs(fileName);
+                ModelState.Clear();*/
+
                 if (model.idArticle > 0)
                 {
                     Article art = dc.Articles.SingleOrDefault(x => x.disponibilite == true && x.idArticle == model.idArticle);
@@ -214,6 +220,7 @@ namespace EBoutique.Controllers
                     art.idCategorie = model.idCategorie;
                     art.idType = model.idType;
                     art.idMarque = model.idMarque;
+                   // art.cheminImage = model.cheminImage;
                     dc.SaveChanges();
                     result = true;
                 }
@@ -231,6 +238,7 @@ namespace EBoutique.Controllers
                     art.idType = model.idType;
                     art.idMarque = model.idMarque;
                     art.disponibilite = false;
+                    
                     dc.Articles.Add(art);
                     dc.SaveChanges();
                     result = true;
@@ -360,7 +368,8 @@ namespace EBoutique.Controllers
         {
             ChatBotC bot = new ChatBotC();
           String res= bot.reponseQuestion(attr);
-            res = "<p>" + res + " </p><br>";
+            //res = "<p>" + res + " </p><br>";
+            
             return Content(res, "text/html");
         }
 

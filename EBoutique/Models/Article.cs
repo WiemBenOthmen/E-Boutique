@@ -11,7 +11,9 @@ namespace EBoutique.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.Web;
+
     public partial class Article
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -30,6 +32,7 @@ namespace EBoutique.Models
         public Nullable<int> nbpieces { get; set; }
         public string couleur { get; set; }
         public string taille { get; set; }
+       
         public string cheminImage { get; set; }
         public Nullable<int> idCategorie { get; set; }
         public Nullable<int> idType { get; set; }
@@ -40,6 +43,7 @@ namespace EBoutique.Models
         public virtual Categorie Categorie { get; set; }
         public virtual Marque Marque { get; set; }
         public virtual Type Type { get; set; }
+       
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LigneCommande> LigneCommandes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
