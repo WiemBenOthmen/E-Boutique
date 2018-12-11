@@ -49,9 +49,6 @@ namespace EBoutique.Controllers
         public ActionResult Home()
         {
             return View();
-        }public ActionResult chatbot()
-        {
-            return View();
         }
         
         public ActionResult Contact()
@@ -432,7 +429,7 @@ namespace EBoutique.Controllers
         {
             ChatBotC bot = new ChatBotC();
           String res= bot.reponseQuestion(attr);
-            res = "<p>" + res + " </p><br>";
+            
             return Content(res, "text/html");
         }
 

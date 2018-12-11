@@ -1,6 +1,4 @@
-﻿
-
-.box {
+﻿.box {
     position: relative;
     border-radius: 3px;
     background: #ffffff;
@@ -23,7 +21,7 @@
     }
 
     .box.box-warning {
-        border-top-color: #f39c12;
+        border-top-color: #fe4c50;
     }
 
     .box.box-success {
@@ -129,13 +127,13 @@
                 }
 
         .box.box-solid.box-warning {
-            border: 1px solid #f39c12;
+            border: 1px solid #fe4c50;
         }
 
             .box.box-solid.box-warning > .box-header {
                 color: #fff;
-                background: #f39c12;
-                background-color: #f39c12;
+                background: #fe4c50;
+                background-color: #fe4c50;
             }
 
                 .box.box-solid.box-warning > .box-header a, .box.box-solid.box-warning > .box-header .btn {
@@ -535,13 +533,13 @@
     }
 
 .direct-chat-warning .right > .direct-chat-text {
-    background: #f39c12;
-    border-color: #f39c12;
+    background: #fe4c50;
+    border-color: #fe4c50;
     color: #fff;
 }
 
     .direct-chat-warning .right > .direct-chat-text:after, .direct-chat-warning .right > .direct-chat-text:before {
-        border-left-color: #f39c12;
+        border-left-color: #fe4c50;
     }
 
 .direct-chat-info .right > .direct-chat-text {
