@@ -167,5 +167,15 @@ namespace EBoutique.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Commande>("fun_display1", mergeOption);
         }
+    
+        public virtual ObjectResult<affichagepanier_Result> affichagepanier()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<affichagepanier_Result>("affichagepanier");
+        }
+    
+        public virtual int fun_affichep()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("fun_affichep");
+        }
     }
 }

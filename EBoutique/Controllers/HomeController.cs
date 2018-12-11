@@ -49,14 +49,8 @@ namespace EBoutique.Controllers
         public ActionResult Home()
         {
             return View();
-        }public ActionResult chatbot()
-        {
-            return View();
         }
-        public ActionResult Panier()
-        {
-            return View();
-        }
+        
         public ActionResult Contact()
         {
             return View();
@@ -154,7 +148,42 @@ namespace EBoutique.Controllers
             iBoutiqureDBEntities4 db = new iBoutiqureDBEntities4();
             return View(db.fun_display1());
         }
+        //public ActionResult Panier()
+        //{
+        //    iBoutiqureDBEntities4 db = new iBoutiqureDBEntities4();
+        //    return View(db.fun_affichep());
 
+        //}
+        //public ActionResult Panier()
+        //{
+        //    return View();
+
+        //}
+        public ActionResult Panier()
+        {
+            iBoutiqureDBEntities4 db = new iBoutiqureDBEntities4();
+            List<LigneCommande> list = db.LigneCommandes.ToList();
+            LigneCommandeViewModel lcvm = new LigneCommandeViewModel();
+
+            List<LigneCommandeViewModel> licmd = list.Select(x => new LigneCommandeViewModel {
+
+                idlignecommande = x.idlignecommande,
+               // idcommande=x.idcommande,
+                qtecmde=x.qtecmde,
+                idarticle=x.idarticle,
+                libelleArticle=x.Article.libelleArticle,
+                cheminImage=x.Article.cheminImage,
+                prix=x.Article.prix,
+                idUser=(int)x.Commande.idUser,
+
+                //descriptionCmd=x.Commande.descriptionCmd
+
+                
+            
+
+            }).ToList();
+            return View(licmd.Where(x=>x.idUser==2));            
+        }
         [HttpPost]
         public ActionResult Deletem(int id)
         {
@@ -335,19 +364,24 @@ namespace EBoutique.Controllers
                 }
             }
         }
-       
+
         [HttpPost]
-        [ActionName("detail")]
-        public ActionResult detailsArticle(int id)
+        [ActionName("Delete")]
+        public ActionResult DeleteUser(int id)
         {
-           // bool status = false;
+            bool status = false;
             using (iBoutiqureDBEntities4 dc = new iBoutiqureDBEntities4())
             {
-                var v = dc.Articles.Where(a => a.idArticle == id).FirstOrDefault();
-               
+                var v = dc.Users.Where(a => a.idUser == id).FirstOrDefault();
+                if (v != null)
+                {
+                    dc.Users.Remove(v);
+                    dc.SaveChanges();
+                    status = true;
+                }
             }
-
-            return View();
+            return RedirectToAction("ListeUsers", "home/ListeUsers");
+            // return new JsonResult { Data = new { status = status } };
         }
 
         //fin partie utilisateur
@@ -355,7 +389,7 @@ namespace EBoutique.Controllers
         {
             ChatBotC bot = new ChatBotC();
           String res= bot.reponseQuestion(attr);
-            res = "<p>" + res + " </p><br>";
+            
             return Content(res, "text/html");
         }
 

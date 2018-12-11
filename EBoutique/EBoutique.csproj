@@ -3291,6 +3291,9 @@
     <Compile Include="Models\Admin.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\affichagepanier_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Article.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -3330,6 +3333,7 @@
     <Compile Include="Models\LigneCommande.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LigneCommandeViewModel.cs" />
     <Compile Include="Models\Livraison.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -3339,6 +3343,7 @@
     <Compile Include="Models\ModeLivraison.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MultipleData.cs" />
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -3381,6 +3386,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
     <Folder Include="Views\Commande\" />
   </ItemGroup>
   <ItemGroup>
